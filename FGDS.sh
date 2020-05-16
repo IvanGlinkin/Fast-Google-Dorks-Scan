@@ -24,26 +24,6 @@ domain=$1 									## Get the domain
 browser='Mozilla/5.0_(MSIE;_Windows_11)'	## Browser information for curl
 gsite="site:$domain" 						## Google Site
 
-## Filetypes
-ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
-ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
-ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
-ftxlsx="filetype:xlsx"						## Filetype XLSX (MsExcel 2007+)
-ftppt="filetype:ppt"						## Filetype PPT (MsPowerPoint 97-2003)
-ftpptx="filetype:pptx"						## Filetype PPTX (MsPowerPoint 2007+)
-ftmdb="filetype:mdb"						## Filetype MDB (Ms Access)
-ftpdf="filetype:pdf"						## Filetype PDF
-ftsql="filetype:sql"						## Filetype SQL
-fttxt="filetype:txt"						## Filetype TXT
-ftrtf="filetype:rtf"						## Filetype RTF
-ftcsv="filetype:csv"						## Filetype CSV
-ftxml="filetype:xml"						## Filetype XML
-ftconf="filetype:conf"						## Filetype CONF
-ftdat="filetype:dat"						## Filetype DAT
-ftini="filetype:ini"						## Filetype INI
-ftlog="filetype:log"						## Filetype LOG
-filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog)
-
 ## Login pages
 lpadmin="inurl:admin"
 lplogin="inurl:login"
@@ -65,9 +45,25 @@ lpfp="inurl:ForgotPassword"
 lptest="inurl:test"
 loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest)
 
-## Content Management System
-cmswp="inurl:wp-content"					## WordPress
-cmsarray=($cmswp)
+## Filetypes
+ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
+ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
+ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
+ftxlsx="filetype:xlsx"						## Filetype XLSX (MsExcel 2007+)
+ftppt="filetype:ppt"						## Filetype PPT (MsPowerPoint 97-2003)
+ftpptx="filetype:pptx"						## Filetype PPTX (MsPowerPoint 2007+)
+ftmdb="filetype:mdb"						## Filetype MDB (Ms Access)
+ftpdf="filetype:pdf"						## Filetype PDF
+ftsql="filetype:sql"						## Filetype SQL
+fttxt="filetype:txt"						## Filetype TXT
+ftrtf="filetype:rtf"						## Filetype RTF
+ftcsv="filetype:csv"						## Filetype CSV
+ftxml="filetype:xml"						## Filetype XML
+ftconf="filetype:conf"						## Filetype CONF
+ftdat="filetype:dat"						## Filetype DAT
+ftini="filetype:ini"						## Filetype INI
+ftlog="filetype:log"						## Filetype LOG
+filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog)
 
 # Clear the terminal
 clear
@@ -140,6 +136,7 @@ echo -e "\e[01;32mChecking Login Page:\e[00m"
 		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $cms | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
 		Query $cms 
 	done
+echo -e "\n"
 }
 ### Function to print information about login page ### END
 
@@ -149,7 +146,8 @@ echo -e "\e[01;32mChecking filetypes:\e[00m"
 	for type in $@; 
 		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $type | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
 		Query $type 
-	done	
+	done
+echo -e "\n"
 }
 ### Function to print information about specific filetype ### END
 
