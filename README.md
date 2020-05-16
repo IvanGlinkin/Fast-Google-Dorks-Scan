@@ -11,8 +11,5 @@ Version: 0.015, May 17, 2020
 
 Features:
 1. Looking for the common admin panel 
-2. Looking for the widespread filetypes
+2. Looking for the widespread file types
 3. Prevent Google banning
-
-=== Release date: May 3, 2020 ===
----------------------------------
