@@ -116,7 +116,7 @@ function Query {
 		### Echo results
 		if [ -z "$result" ] 
 			then
-				echo -e "\e[00;33m[\e[00m\e[01;31m-\e[00m\e[00;33m]\e[00m No results\n"
+				echo -e "\e[00;33m[\e[00m\e[01;31m-\e[00m\e[00;33m]\e[00m No results"
 			else
 				IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n")) # Sort the results with unique key
 				echo -e " "
