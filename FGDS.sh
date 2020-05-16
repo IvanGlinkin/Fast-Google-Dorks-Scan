@@ -15,13 +15,16 @@
 # [00;37m white 		\e[00m
 
 # Variables
-version="0.004"								## Version Year.Day
-updatedate="May 06,2020"					## The date of the last update
+## General
+version="0.015"								## Version Year.Day
+updatedate="May 17,2020"					## The date of the last update
 example_domain="megacorp.one" 				## Example domain
 sleeptime=5									## Delay between queries
 domain=$1 									## Get the domain
 browser='Mozilla/5.0_(MSIE;_Windows_11)'	## Browser information for curl
 gsite="site:$domain" 						## Google Site
+
+## Filetypes
 ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
 ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
 ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
@@ -32,8 +35,39 @@ ftmdb="filetype:mdb"						## Filetype MDB (Ms Access)
 ftpdf="filetype:pdf"						## Filetype PDF
 ftsql="filetype:sql"						## Filetype SQL
 fttxt="filetype:txt"						## Filetype TXT
+ftrtf="filetype:rtf"						## Filetype RTF
+ftcsv="filetype:csv"						## Filetype CSV
 ftxml="filetype:xml"						## Filetype XML
-filetypesarrays=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftxml)
+ftconf="filetype:conf"						## Filetype CONF
+ftdat="filetype:dat"						## Filetype DAT
+ftini="filetype:ini"						## Filetype INI
+ftlog="filetype:log"						## Filetype LOG
+filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog)
+
+## Login pages
+lpadmin="inurl:admin"
+lplogin="inurl:login"
+lpadminlogin="inurl:adminlogin"
+lpcplogin="inurl:cplogin"
+lpweblogin="inurl:weblogin"
+lpquicklogin="inurl:quicklogin"
+lpwp1="inurl:wp-admin"
+lpwp2="inurl:wp-login"
+lpportal="inurl:portal"
+lpuserportal="inurl:userportal"
+lploginpanel="inurl:loginpanel"
+lpmemberlogin="inurl:memberlogin"
+lpremote="inurl:remote"
+lpdashboard="inurl:dashboard"
+lpauth="inurl:auth"
+lpexc="inurl:exchange"
+lpfp="inurl:ForgotPassword"
+lptest="inurl:test"
+loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest)
+
+## Content Management System
+cmswp="inurl:wp-content"					## WordPress
+cmsarray=($cmswp)
 
 # Clear the terminal
 clear
@@ -55,11 +89,11 @@ echo -e "\e[00;33m# Version:                 \e[00m" "\e[01;31m$version\e[00m"
 		exit
 	else
 			echo -e "\e[00;33m# Get information about:   \e[00m" "\e[01;31m$domain\e[00m"
-			echo -e "\e[00;33m# Delay between queries:   \e[00m" "\e[01;31m$sleeptime\e[00m" "\e[00;33msec\e[00m"
+			echo -e "\e[00;33m# Delay between queries:   \e[00m" "\e[01;31m$sleeptime\e[00m" "\e[00;33msec\e[00m\n"
 	fi
 
-### Function to get information about filetype ### START
-function GetFileType {
+### Function to get information about site ### START
+function Query {
 		result="";
 		for start in `seq 0 10 10`; ##### Last number - quantity of possible answers
 			do
@@ -86,7 +120,7 @@ function GetFileType {
 		### Echo results
 		if [ -z "$result" ] 
 			then
-				echo -e "\e[00;33m[\e[00m\e[01;31m-\e[00m\e[00;33m]\e[00m No results"
+				echo -e "\e[00;33m[\e[00m\e[01;31m-\e[00m\e[00;33m]\e[00m No results\n"
 			else
 				IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n")) # Sort the results with unique key
 				echo -e " "
@@ -97,17 +131,28 @@ function GetFileType {
 		### Unset variables
 		unset IFS sorted result checkdata checkban query
 }
-### Function to get information about filetype ### END
+### Function to get information about site ### END
 
+### Function to print information about login page ### START
+function PrintLoginPageResults {
+echo -e "\e[01;32mChecking Login Page:\e[00m"
+	for cms in $@; 
+		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $cms | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
+		Query $cms 
+	done
+}
+### Function to print information about login page ### END
 
 ### Function to print information about specific filetype ### START
 function PrintFiletypeResults {
+echo -e "\e[01;32mChecking filetypes:\e[00m"
 	for type in $@; 
-		do echo -en "\n\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $type | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') ... 
-		GetFileType $type 
-	done
+		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $type | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
+		Query $type 
+	done	
 }
 ### Function to print information about specific filetype ### END
 
 # Exploit
-PrintFiletypeResults "${filetypesarrays[@]}";
+PrintLoginPageResults "${loginpagearray[@]}";
+PrintFiletypeResults "${filetypesarray[@]}";
