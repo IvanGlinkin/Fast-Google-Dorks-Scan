@@ -1,11 +1,11 @@
 Fast Google Dorks Scan
-
+======================
 
 A script to enumerate web-sites using Google dorks. 
 
 
 Usage example: ./FGDS.sh megacorp.one
-
+-------------------------------------
 
 Version: 0.004, May 6, 2020
 
