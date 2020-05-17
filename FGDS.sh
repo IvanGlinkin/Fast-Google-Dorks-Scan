@@ -16,8 +16,8 @@
 
 # Variables
 ## General
-version="0.015"								## Version Year.Day
-updatedate="May 17,2020"					## The date of the last update
+version="0.016"								## Version Year.Day
+updatedate="May 18,2020"					## The date of the last update
 example_domain="megacorp.one" 				## Example domain
 sleeptime=5									## Delay between queries
 domain=$1 									## Get the domain
@@ -65,6 +65,11 @@ ftini="filetype:ini"						## Filetype INI
 ftlog="filetype:log"						## Filetype LOG
 filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog)
 
+## Directory traversal
+dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
+dtdcim='intitle:%22Index%20of%22%20%22DCIM%22' 					## Photo
+dirtravarray=($dtparent $dtdcim)
+
 # Clear the terminal
 clear
 
@@ -91,7 +96,7 @@ echo -e "\e[00;33m# Version:                 \e[00m" "\e[01;31m$version\e[00m"
 ### Function to get information about site ### START
 function Query {
 		result="";
-		for start in `seq 0 10 10`; ##### Last number - quantity of possible answers
+		for start in `seq 0 10 40`; ##### Last number - quantity of possible answers
 			do
 				query=$(echo; curl -sS -A $browser "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
 
@@ -132,9 +137,9 @@ function Query {
 ### Function to print information about login page ### START
 function PrintLoginPageResults {
 echo -e "\e[01;32mChecking Login Page:\e[00m"
-	for cms in $@; 
-		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $cms | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
-		Query $cms 
+	for loginpage in $@; 
+		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $loginpage | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
+		Query $loginpage 
 	done
 echo -e "\n"
 }
@@ -151,6 +156,18 @@ echo -e "\n"
 }
 ### Function to print information about specific filetype ### END
 
+### Function to print information about specific filetype ### START
+function PrintDirectoryTraversalResults {
+echo -e "\e[01;32mChecking path traversal:\e[00m"
+	for dirtrav in $@; 
+		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") "\t" 
+		Query $dirtrav 
+	done
+echo -e "\n"
+}
+### Function to print information about specific filetype ### END
+
 # Exploit
 PrintLoginPageResults "${loginpagearray[@]}";
 PrintFiletypeResults "${filetypesarray[@]}";
+PrintDirectoryTraversalResults "${dirtravarray[@]}";
