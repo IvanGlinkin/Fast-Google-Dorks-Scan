@@ -4,22 +4,12 @@
 # Contact: ivan.o.glinkin@gmail.com
 # Release date: May 3, 2020
 
-##### Defined colors
-# [00;30m black 		\e[00m
-# [00;31m red   		\e[00m
-# [00;32m green 		\e[00m
-# [00;33m orange 		\e[00m
-# [00;34m blue 			\e[00m
-# [00;35m purple 		\e[00m
-# [00;36m light blue 	\e[00m
-# [00;37m white 		\e[00m
-
 # Variables
 ## General
-version="0.016"								## Version Year.Day
+version="0.035"								## Version Year.Day
 updatedate="May 18,2020"					## The date of the last update
 example_domain="megacorp.one" 				## Example domain
-sleeptime=5									## Delay between queries
+sleeptime=6									## Delay between queries, in seconds
 domain=$1 									## Get the domain
 browser='Mozilla/5.0_(MSIE;_Windows_11)'	## Browser information for curl
 gsite="site:$domain" 						## Google Site
@@ -63,15 +53,18 @@ ftconf="filetype:conf"						## Filetype CONF
 ftdat="filetype:dat"						## Filetype DAT
 ftini="filetype:ini"						## Filetype INI
 ftlog="filetype:log"						## Filetype LOG
-filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog)
+ftidrsa="index%20of:id_rsa%20id_rsa.pub"	## File ID_RSA
+filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa)
 
 ## Directory traversal
 dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
-dtdcim='intitle:%22Index%20of%22%20%22DCIM%22' 					## Photo
-dirtravarray=($dtparent $dtdcim)
-
-# Clear the terminal
-clear
+dtdcim='intitle:%22index%20of%22%20%22DCIM%22' 					## Photo
+dtftp='intitle:%22index%20of%22%20%22ftp%22' 					## FTP
+dtbackup='intitle:%22index%20of%22%20%22backup%22'				## BackUp
+dtmail='intitle:%22index%20of%22%20%22mail%22'					## Mail
+dtpassword='intitle:%22index%20of%22%20%22password%22'			## Password
+dtpub='intitle:%22index%20of%22%20%22pub%22'					## Pub
+dirtravarray=($dtparent $dtdcim $dtftp $dtbackup $dtmail $dtpassword $dtpub)
 
 # Header
 echo -e "\n\e[00;33m#########################################################\e[00m"
@@ -126,7 +119,6 @@ function Query {
 				IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n")) # Sort the results with unique key
 				echo -e " "
 				for each in "${sorted[@]}"; do echo -e "     \e[00;33m[\e[00m\e[01;32m+\e[00m\e[00;33m]\e[00m $each"; done
-				 
 		fi
 
 		### Unset variables
@@ -134,40 +126,18 @@ function Query {
 }
 ### Function to get information about site ### END
 
-### Function to print information about login page ### START
-function PrintLoginPageResults {
-echo -e "\e[01;32mChecking Login Page:\e[00m"
-	for loginpage in $@; 
-		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $loginpage | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
-		Query $loginpage 
-	done
-echo -e "\n"
-}
-### Function to print information about login page ### END
 
-### Function to print information about specific filetype ### START
-function PrintFiletypeResults {
-echo -e "\e[01;32mChecking filetypes:\e[00m"
-	for type in $@; 
-		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $type | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]') "\t" 
-		Query $type 
-	done
-echo -e "\n"
-}
-### Function to print information about specific filetype ### END
-
-### Function to print information about specific filetype ### START
-function PrintDirectoryTraversalResults {
-echo -e "\e[01;32mChecking path traversal:\e[00m"
+### Function to print the results ### START
+function PrintTheResults {
 	for dirtrav in $@; 
 		do echo -en "\e[00;33m[\e[00m\e[01;31m*\e[00m\e[00;33m]\e[00m" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") "\t" 
 		Query $dirtrav 
 	done
-echo -e "\n"
+echo " "
 }
-### Function to print information about specific filetype ### END
+### Function to print the results ### END
 
 # Exploit
-PrintLoginPageResults "${loginpagearray[@]}";
-PrintFiletypeResults "${filetypesarray[@]}";
-PrintDirectoryTraversalResults "${dirtravarray[@]}";
+echo -e "\e[01;32mChecking Login Page:\e[00m"; PrintTheResults "${loginpagearray[@]}";
+echo -e "\e[01;32mChecking specific files:\e[00m"; PrintTheResults "${filetypesarray[@]}";
+echo -e "\e[01;32mChecking path traversal:\e[00m"; PrintTheResults "${dirtravarray[@]}";
