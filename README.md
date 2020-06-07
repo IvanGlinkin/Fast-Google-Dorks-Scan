@@ -16,6 +16,4 @@ Features:
 4. Prevent Google banning
 
 ![](https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/img/1.png)
-![](https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/img/2.png)
 ![](https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/img/3.png)
-![](https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/img/4.png)
