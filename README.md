@@ -7,7 +7,7 @@ A script to enumerate web-sites using Google dorks.
 Usage example: ./FGDS.sh megacorp.one
 -------------------------------------
 
-Version: 0.016, May 18, 2020
+Version: 0.035, June 07, 2020
 
 Features:
 1. Looking for the common admin panel 
