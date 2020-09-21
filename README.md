@@ -22,8 +22,6 @@ An original article:
 Video example:
 --------------
 ![](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds1.gif)
-https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds1.gif
-
 
 Screenshots:
 ------------
