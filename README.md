@@ -1,19 +1,29 @@
-Fast Google Dorks Scan
-======================
+# Fast Google Dorks Scan
 
-A script to enumerate web-sites using Google dorks. 
+The simple program for finding the common admin panels, the widespread file types and path traversal. The 100% automated.
+
+Usage example:
+--------------
+```
+chmod +x FGDS.sh
+./FGDS.sh megacorp.one
+```
+or
+```
+bash ./FGDS.sh megacorp.one
+```
 
 
-Usage example: ./FGDS.sh megacorp.one
--------------------------------------
+An original article:
+--------------------
+[https://www.ivanglinkin.com/fast-google-dorks-scan/](https://www.ivanglinkin.com/fast-google-dorks-scan/)
 
-Version: 0.035, June 07, 2020
 
-Features:
-1. Looking for the common admin panel 
-2. Looking for the widespread file types
-3. Path traversal
-4. Prevent Google banning
+Video example:
+--------------
+![](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds1.gif)
 
-![](https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/img/1.png)
-![](https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/img/3.png)
+
+Screenshots:
+------------
+![](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds.png)
