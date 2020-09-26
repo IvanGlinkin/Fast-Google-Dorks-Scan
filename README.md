@@ -1,6 +1,6 @@
 # Fast Google Dorks Scan
 
-The simple program for finding the common admin panels, the widespread file types and path traversal. The 100% automated.
+The OSINT project, the main idea of which is to collect all the possible Google dorks search combinations and to find the information about the specific web-site: common admin panels, the widespread file types and path traversal. The 100% automated.
 
 Usage example:
 --------------
