@@ -6,12 +6,12 @@
 
 # Variables
 ## General
-version="0.035"								## Version Year.Day
+version="1.010"								## Version Year.Day
 updatedate="May 18,2020"					## The date of the last update
 example_domain="megacorp.one" 				## Example domain
 sleeptime=6									## Delay between queries, in seconds
 domain=$1 									## Get the domain
-browser='Mozilla/5.0_(MSIE;_Windows_11)'	## Browser information for curl
+browser='Mozilla'	## Browser information for curl
 gsite="site:$domain" 						## Google Site
 
 ## Login pages
