@@ -91,7 +91,7 @@ function Query {
 		result="";
 		for start in `seq 0 10 40`; ##### Last number - quantity of possible answers
 			do
-				query=$(echo; curl -sS -A $browser "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+				query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A $browser "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
 
 				checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
 				if [ "$checkban" == "https://www.google.com/sorry/index" ]
