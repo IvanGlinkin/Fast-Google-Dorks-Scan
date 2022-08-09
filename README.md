@@ -13,6 +13,17 @@ or
 bash ./FGDS.sh megacorp.one
 ```
 
+This will work beatifully on Kali but an ultimately universal way is through Docker. Just run 
+
+```
+docker build -t FOO .
+```
+
+and then run it with your argument for the URL such as this:
+
+```
+docker run -it --rm FOO mysite.com
+```
 
 An original article:
 --------------------
