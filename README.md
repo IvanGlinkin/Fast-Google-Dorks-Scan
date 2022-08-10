@@ -37,4 +37,4 @@ https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds1.gif
 
 Screenshots:
 ------------
-![](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds.png)
+[](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds.png)
