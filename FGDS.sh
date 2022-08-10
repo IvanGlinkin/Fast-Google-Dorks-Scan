@@ -6,8 +6,8 @@
 
 # Variables
 ## General
-version="1.010"								## Version Year.Day
-updatedate="May 18,2020"					## The date of the last update
+version="1.011"								## Version Year.Day
+updatedate="Aug 9,2022"				    	## The date of the last update
 example_domain="megacorp.one" 				## Example domain
 sleeptime=6									## Delay between queries, in seconds
 domain=$1 									## Get the domain
