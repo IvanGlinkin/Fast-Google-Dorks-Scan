@@ -54,7 +54,17 @@ ftdat="filetype:dat"						## Filetype DAT
 ftini="filetype:ini"						## Filetype INI
 ftlog="filetype:log"						## Filetype LOG
 ftidrsa="index%20of:id_rsa%20id_rsa.pub"	## File ID_RSA
-filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa)
+ftpy="filetype:py"						## Filetype Python
+ftphtml="filetype:html"						## Filetype HTML
+ftpsh="filetype:sh"						## Filetype Bash 
+ftpodt="filetype:odt"						## Filetype ODT
+ftpkey="filetype:key"						## Filetype KEY
+ftpsgn="filetype:sign"						## Filetype SIGN
+ftpmd="filetype:md"						## Filetype MD 
+ftpold="filetype:old"						## Filetype OLD 
+ftpbin="filetype:bin"						## Filetype BIN 
+
+filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa $ftpy $ftphtml $ftpsh $ftpodt $ftpkey $ftpsgn $ftpmd $ftpold $ftpbin )
 
 ## Directory traversal
 dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
