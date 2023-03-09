@@ -36,4 +36,4 @@ Video example:
 
 Screenshots:
 ------------
-![](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds.png)
+![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_image.png?raw=true)
