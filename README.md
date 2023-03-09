@@ -32,8 +32,7 @@ An original article:
 
 Video example:
 --------------
-https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds1.gif
-![](https://www.ivanglinkin.com/wp-content/uploads/2020/09/fgds1.gif)
+![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_Video.gif?raw=true)
 
 Screenshots:
 ------------
