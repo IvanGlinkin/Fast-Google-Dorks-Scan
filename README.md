@@ -36,4 +36,4 @@ Video example:
 
 Screenshots:
 ------------
-![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_image.png?raw=true)
+![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_image_2.335.png?raw=true)
