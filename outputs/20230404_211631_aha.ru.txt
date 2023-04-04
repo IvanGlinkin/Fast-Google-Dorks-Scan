@@ -1,0 +1,143 @@
+[01;36m[ > ][00m Checking ADMIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:admin[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking LOGIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:login[00m [00;33m][00m 
+	[00;32m[ + ][00m http://el-berdsk.aha.ru/login/forgot_password.php
+	[00;32m[ + ][00m http://lleo.aha.ru/dnevnik/
+	[00;32m[ + ][00m http://www.lisa.aha.ru/forum/index.php
+	[00;32m[ + ][00m http://www.startrek.aha.ru/cgi-bin//YaBB.cgi
+[01;36m[ > ][00m Checking ADMINLOGIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:adminlogin[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking CPLOGIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:cplogin[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking WEBLOGIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:weblogin[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking QUICKLOGIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:quicklogin[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking WP-ADMIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:wp-admin[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking WP-LOGIN [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:wp-login[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking PORTAL [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:portal[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking USERPORTAL [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:userportal[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking LOGINPANEL [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:loginpanel[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking REMOTE [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:remote[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking DASHBOARD [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:dashboard[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking AUTH [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:auth[00m [00;33m][00m 
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/arnold.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/cassel.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/casson.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/frish.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/khovansk.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/kirillov.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/kobzarev.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/krasnosh.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/leontovich.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/manin.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/pavlovs.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/prasolov.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/savin.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/shiraev.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/sinai.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/starkov.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/sarnak.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/tresch.shtml
+	[00;32m[ + ][00m http://www.aha.ru/~phasis/rus/auth/vasil.shtml
+[01;36m[ > ][00m Checking EXCHANGE [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:exchange[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking FORGOTPASSWORD [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:ForgotPassword[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking TEST [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:test[00m [00;33m][00m 
+	[00;32m[ + ][00m http://piccolo.aha.ru/catalog/analiz-mochi/combur-10-test-ux-/
+	[00;32m[ + ][00m http://piccolo.aha.ru/catalog/analiz-mochi/micral-test-ii-30-tests/
+	[00;32m[ + ][00m http://www.aha.ru/~oksana/soul/consult/skin/test.html
+	[00;32m[ + ][00m http://www.piccolo.aha.ru/catalog/diagnostika-sepsisa/ekspress-test-na-prokaltsitonin-brahms-pct-q-25/
+[01;36m[ > ][00m Checking .GIT [00;33m[ Google query:[00m[01;36m site:aha.ru inurl:.git[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+ 
+[01;36m[ > ][00m Checking DOC [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:doc[00m [00;33m][00m 
+	[00;32m[ + ][00m http://kors.aha.ru/instr/instrkul2.doc
+[01;36m[ > ][00m Checking DOCX [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:docx[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking XLS [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:xls[00m [00;33m][00m 
+	[00;32m[ + ][00m http://www.aha.ru/~sharm/price.xls
+[01;36m[ > ][00m Checking XLSX [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:xlsx[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking PPT [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:ppt[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking PPTX [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:pptx[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking MDB [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:mdb[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking PDF [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:pdf[00m [00;33m][00m 
+	[00;32m[ + ][00m http://aha.ru/~geivanit/ijpsycho.pdf
+	[00;32m[ + ][00m http://aon.aha.ru/Docs/FAR/far103.pdf
+	[00;32m[ + ][00m http://aon.aha.ru/Docs/ICAO/annex1.pdf
+	[00;32m[ + ][00m http://www.aon.aha.ru/Docs/poroject/AR_work.pdf
+	[00;32m[ + ][00m http://ico.aha.ru/h/MZ-NH900_sm.pdf
+	[00;32m[ + ][00m http://miet.aha.ru/cg/qol.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/papers12.pdf
+	[00;32m[ + ][00m http://miet.aha.ru/cg/rgr_2019.pdf
+	[00;32m[ + ][00m http://miet.aha.ru/cm/bdz2016/bdz_1_22a.pdf
+	[00;32m[ + ][00m http://miet.aha.ru/cm/ChislMet.pdf
+	[00;32m[ + ][00m http://miet.aha.ru/cm/ex3.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~lidos/manual.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/lecture11.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/lecture21.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/lecture21.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/lecture22.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/lecture5.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/papers10.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/papers11.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~msa/papers8.pdf
+	[00;32m[ + ][00m http://www.aha.ru/~soliton/english/articles/ocs.pdf
+	[00;32m[ + ][00m http://www.melt.aha.ru/pdf/connect4.pdf
+	[00;32m[ + ][00m http://www.melt.aha.ru/pdf/extk2000.pdf
+	[00;32m[ + ][00m http://www.melt.aha.ru/pdf/talk3.pdf
+	[00;32m[ + ][00m http://www.melt.aha.ru/pdf/v31a-lc16-3.pdf
+	[00;32m[ + ][00m http://www.melt.aha.ru/pdf/v31a-lc16-t4.pdf
+	[00;32m[ + ][00m http://www.melt.aha.ru/pdf/v55.pdf
+	[00;32m[ + ][00m http://www.mgl.aha.ru/bmr.pdf
+	[00;32m[ + ][00m http://www.miet.aha.ru/cg/cg_2014.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/biodiv/child5.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/ots/doc/book028.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/ots/evol.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/ots/OTS_Deistv.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/ots/OTSU.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/ots/symmr.pdf
+	[00;32m[ + ][00m http://www.sci.aha.ru/ots/UFO.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/murata/c02e3.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/murata/o05e3.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/murata/r82e2.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/njr/NJM79.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/pdf/t13e4.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/philips/bas16.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/philips/bat54.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/pdf/umf5n.pdf
+	[00;32m[ + ][00m http://www.smp.aha.ru/philips/BFR93A_2.pdf
+[01;36m[ > ][00m Checking SQL [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:sql[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking TXT [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:txt[00m [00;33m][00m 
+	[00;32m[ + ][00m http://ico.aha.ru/shpp/pril3.txt
+[01;36m[ > ][00m Checking RTF [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:rtf[00m [00;33m][00m 
+	[00;32m[ + ][00m http://lleo.aha.ru/polezno/kinoformat.rtf
+[01;36m[ > ][00m Checking CSV [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:csv[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking XML [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:xml[00m [00;33m][00m 
+	[00;32m[ + ][00m http://www.sci.aha.ru/sitemap1.xml
+[01;36m[ > ][00m Checking CONF [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:conf[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking DAT [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:dat[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking INI [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:ini[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking LOG [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:log[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking ID_RSA ID_RSA.PUB [00;33m[ Google query:[00m[01;36m site:aha.ru index of:id_rsa id_rsa.pub[00m [00;33m][00m
+	[01;31m[ - ][00m No results
+[01;36m[ > ][00m Checking PY [00;33m[ Google query:[00m[01;36m site:aha.ru filetype:py[00m [00;33m][00m
+	[01;31m[ - ][00m No results
