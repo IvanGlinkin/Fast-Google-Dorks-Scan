@@ -1,0 +1,8 @@
+intitle:%22index%20of%22%20%22parent%20directory%22
+intitle:%22index%20of%22%20%22DCIM%22
+intitle:%22index%20of%22%20%22ftp%22
+intitle:%22index%20of%22%20%22backup%22
+intitle:%22index%20of%22%20%22mail%22
+intitle:%22index%20of%22%20%22password%22
+intitle:%22index%20of%22%20%22pub%22
+intitle:%22index%20of%22%20%22.git%22
