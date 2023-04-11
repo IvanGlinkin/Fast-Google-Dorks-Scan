@@ -34,7 +34,7 @@ CLEAR_FONT=`echo -n '\e[00m'`;
 
 # Read login page URLs from payload.txt into an array
 while IFS= read -r line; do
-    login_page_array+=("$line")
+    loginpagearray+=("$line")
 done < <(cat login_pages.txt)
 
 # File Types
