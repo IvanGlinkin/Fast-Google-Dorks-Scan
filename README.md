@@ -1,6 +1,6 @@
 # Fast Google Dorks Scan Axiom Edition
 
-This work is based on an idea for bypassing Google's spam protection
+This work is based on [an idea](https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan/issues/9) for bypassing Google's spam protection
 
 # Usage example:
 
