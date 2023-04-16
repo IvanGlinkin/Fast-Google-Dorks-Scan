@@ -8,7 +8,7 @@ This work is based on [an idea](https://github.com/IvanGlinkin/Fast-Google-Dorks
 `axiom-fleet "kole-" -i 5`
 
 ## Send the FGDS.sh to instances and give execution permission
-`axiom-exec "wget YOUR-SERVER/FGDS.sh && chmod +x FGDS.sh"`
+`axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/FGDS.sh && chmod +x FGDS.sh"`
 
 ## Add the fgds.json to your modules
 `mv fgds.json .axiom/modules`
