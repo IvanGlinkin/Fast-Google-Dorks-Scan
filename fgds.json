@@ -1,4 +1,0 @@
-[{
-    "command":"/home/op/FGDS.sh --payloads input |tee -a output",
-    "ext":"txt"
-}]

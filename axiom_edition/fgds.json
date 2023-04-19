@@ -1,0 +1,4 @@
+[{
+    "command":"/home/op/fgds_axiom.sh --payloads input |tee -a output",
+    "ext":"txt"
+}]

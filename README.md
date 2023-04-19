@@ -1,18 +1,39 @@
-# Fast Google Dorks Scan Axiom Edition
+# Fast Google Dorks Scan
 
-This work is based on [an idea](https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan/issues/9) for bypassing Google's robot protection
+The OSINT project, the main idea of which is to collect all the possible Google dorks search combinations and to find the information about the specific web-site: common admin panels, the widespread file types and path traversal. The 100% automated.
 
-# Usage example:
+Usage example:
+--------------
+```
+chmod +x FGDS.sh
+./FGDS.sh megacorp.one
+```
+or
+```
+bash ./FGDS.sh megacorp.one
+```
 
-## Create your axiom instances
-`axiom-fleet "kole-" -i 5`
+This will work beatifully on Kali but an ultimately universal way is through Docker. Just run 
 
-## Send the FGDS.sh to instances and give execution permission
-`axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/FGDS.sh && chmod +x FGDS.sh"`
+```
+docker build -t FOO .
+```
 
-## Add the fgds.json to your modules
-`mv fgds.json .axiom/modules`
+and then run it with your argument for the URL such as this:
 
-## We are ready to start, choose predefined dorks, or use yours on target
-`axiom-scan payloads.txt -m fgds --target hackerone.com -o fgds_results.txt`
+```
+docker run -it --rm FOO mysite.com
+```
 
+An original article:
+--------------------
+[https://www.ivanglinkin.com/fast-google-dorks-scan/](https://www.ivanglinkin.com/fast-google-dorks-scan/)
+
+
+Video example:
+--------------
+![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_Video.gif?raw=true)
+
+Screenshots:
+------------
+![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_image_2.335.png?raw=true)

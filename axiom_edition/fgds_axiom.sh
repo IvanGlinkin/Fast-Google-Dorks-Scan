@@ -12,15 +12,7 @@
 # LinkedIn: https://www.linkedin.com/in/ivanglinkin/                       #
 ############################################################################
 
-# Variables
-## General
-version="2.335"			## Version Year.Day
-updatedate="April 5,2023"	## The date of the last update
-releasedate="May 3, 2020"	## The date of release
-example_domain="megacorp.one" 	## Example domain
-domain=$1 			## Get the domain
-gsite="site:$domain" 		## Google Site
-folder="outputs"		## Output folder name
+
 
 ## Colors
 RED=`echo -n '\e[00;31m'`;
@@ -32,74 +24,77 @@ BLUE=`echo -n '\e[01;36m'`;
 WHITE=`echo -n '\e[00;37m'`;
 CLEAR_FONT=`echo -n '\e[00m'`;
 
-## Login pages
-lpadmin="inurl:admin"
-lplogin="inurl:login"
-lpadminlogin="inurl:adminlogin"
-lpcplogin="inurl:cplogin"
-lpweblogin="inurl:weblogin"
-lpquicklogin="inurl:quicklogin"
-lpwp1="inurl:wp-admin"
-lpwp2="inurl:wp-login"
-lpportal="inurl:portal"
-lpuserportal="inurl:userportal"
-lploginpanel="inurl:loginpanel"
-lpmemberlogin="inurl:memberlogin"
-lpremote="inurl:remote"
-lpdashboard="inurl:dashboard"
-lpauth="inurl:auth"
-lpexc="inurl:exchange"
-lpfp="inurl:ForgotPassword"
-lptest="inurl:test"
-lgit="inurl:.git"
-loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest $lgit)
+while [[ $# -gt 0 ]]; do
+  key="$1"
 
-## Filetypes
-ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
-ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
-ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
-ftxlsx="filetype:xlsx"						## Filetype XLSX (MsExcel 2007+)
-ftppt="filetype:ppt"						## Filetype PPT (MsPowerPoint 97-2003)
-ftpptx="filetype:pptx"						## Filetype PPTX (MsPowerPoint 2007+)
-ftmdb="filetype:mdb"						## Filetype MDB (Ms Access)
-ftpdf="filetype:pdf"						## Filetype PDF
-ftsql="filetype:sql"						## Filetype SQL
-fttxt="filetype:txt"						## Filetype TXT
-ftrtf="filetype:rtf"						## Filetype RTF
-ftcsv="filetype:csv"						## Filetype CSV
-ftxml="filetype:xml"						## Filetype XML
-ftconf="filetype:conf"						## Filetype CONF
-ftdat="filetype:dat"						## Filetype DAT
-ftini="filetype:ini"						## Filetype INI
-ftlog="filetype:log"						## Filetype LOG
-ftidrsa="index%20of:id_rsa%20id_rsa.pub"			## File ID_RSA
-ftpy="filetype:py"						## Filetype Python
-ftphtml="filetype:html"						## Filetype HTML
-ftpsh="filetype:sh"						## Filetype Bash 
-ftpodt="filetype:odt"						## Filetype ODT
-ftpkey="filetype:key"						## Filetype KEY
-ftpsgn="filetype:sign"						## Filetype SIGN
-ftpmd="filetype:md"						## Filetype MD 
-ftpold="filetype:old"						## Filetype OLD 
-ftpbin="filetype:bin"						## Filetype BIN 
-ftcer="filetype:cer"						## Filetype Certificate 
-ftcrt="filetype:crt"						## Filetype Certificate 
-ftpfx="filetype:pfx"						## Filetype Certificate 
-ftcrl="filetype:crl"						## Filetype Certificate 
-ftcrs="filetype:crs"						## Filetype Certificate 
-ftder="filetype:der"						## Filetype Certificate 
-filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa $ftpy $ftphtml $ftpsh $ftpodt $ftpkey $ftpsgn $ftpmd $ftpold $ftpbin $ftcer $ftcrt $ftpfx $ftcrl $ftcrs $ftder)
+  case $key in
+    --payloads)
+      payloads="$2"
+      shift
+      shift
+      ;;
+    --target)
+      target="$2"
+      shift
+      shift
+      ;;
+    *)
+      echo "Unknown argument: $1"
+      exit 1
+      ;;
+  esac
+done
 
-## Directory traversal
-dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
-dtdcim='intitle:%22index%20of%22%20%22DCIM%22' 			## Photo
-dtftp='intitle:%22index%20of%22%20%22ftp%22' 			## FTP
-dtbackup='intitle:%22index%20of%22%20%22backup%22'		## BackUp
-dtmail='intitle:%22index%20of%22%20%22mail%22'			## Mail
-dtpassword='intitle:%22index%20of%22%20%22password%22'		## Password
-dtpub='intitle:%22index%20of%22%20%22pub%22'			## Pub
-dtgit='intitle:%22index%20of%22%20%22.git%22'			## Pub
-dirtravarray=($dtparent $dtdcim $dtftp $dtbackup $dtmail $dtpassword $dtpub $dtgit)
+# Check if payload argument is provided
+if [ -z "$payloads" ]; then
+  echo "Payloads not provided"
+  echo "Usage ./fgds.sh --payloads payload_list.txt --target target.com OR echo target.com | ./fgds.sh --payloads payload_list.txt"
+  exit 1
+fi
+
+# If target argument is not provided, read from stdin
+if [ -z "$target" ]; then
+  echo "Target not provided. Reading from stdin..."
+  read -t 5 target
+  if [ -z "$target" ]; then
+    echo "No input received from stdin. Exiting..."
+	echo "Usage ./fgds.sh --payloads payload_list.txt --target target.com OR echo target.com | ./fgds.sh --payloads payload_list.txt"
+    exit 1
+  fi
+fi
+
+# Variables
+## General
+version="3.0"			## Version Year.Day
+updatedate="April 13,2023"	## The date of the last update
+releasedate="May 3, 2020"	## The date of release
+example_domain="megacorp.one" 	## Example domain
+# domain=$1 			## Get the domain
+gsite="site:$target" 		## Google Site
+folder="outputs"		## Output folder name
+
+# Custom List
+while IFS= read -r line; do
+    custom_payloads_list+=("$line")
+done < <(cat $payloads)
+
+
+# Read login page URLs from login_pages.txt into an array
+# while IFS= read -r line; do
+#     loginpagearray+=("$line")
+# done < <(cat login_pages.txt)
+
+# # File Types
+# while IFS= read -r line; do
+#     filetypesarray+=("$line")
+# done < <(cat file_types.txt)
+
+# ## Directory traversal
+# while IFS= read -r line; do
+# 	dirtravarray+=("$line")
+# done < <(cat directory_traversal.txt)
+
+## User-agents
 
 ## User-agents
 useragentsarray=(
@@ -1018,7 +1013,7 @@ echo -e "$ORANGE[ ! ] Version: $version $CLEAR_FONT";
 echo -e "";
 
 # Check domain
-if [ -z "$domain" ] 
+if [ -z "$target" ] 
 then
 	echo -e "$ORANGE[ ! ] Usage example:$CLEAR_FONT$RED_BOLD bash $0 $example_domain $CLEAR_FONT"
 	exit
@@ -1026,9 +1021,9 @@ else
 	### Check if the folder for outputs is existed. IF not, create a folder
 	if [ ! -d "$folder" ]; then mkdir "$folder"; fi
 	## Create an output file
-	filename=$(date +%Y%m%d_%H%M%S)_$domain.txt
+	filename=$(date +%Y%m%d_%H%M%S)_$target.txt
 	
-	echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
+	echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$target$CLEAR_FONT"
 	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)/$folder/$filename$CLEAR_FONT"
 fi
 
@@ -1049,7 +1044,7 @@ function Query {
 				exit;
 			fi
 				
-			checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$domain/[a-zA-Z0-9./?=_~-]*")
+			checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$target/[a-zA-Z0-9./?=_~-]*")
 			
 			sleeptime=$(shuf -i8-12 -n1);
 			if [ -z "$checkdata" ]
@@ -1090,6 +1085,7 @@ echo " "
 ### Function to print the results ### END
 
 # Exploit
-echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${loginpagearray[@]}" | tee -a $folder/$filename;
-echo -e "$GREEN_BOLD[ * ] Checking specific files:$CLEAR_FONT"; PrintTheResults "${filetypesarray[@]}" | tee -a $folder/$filename;
-echo -e "$GREEN_BOLD[ * ] Checking path traversal:$CLEAR_FONT"; PrintTheResults "${dirtravarray[@]}" | tee -a $folder/$filename;
+echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${custom_payloads_list[@]}" | tee -a $folder/$filename;
+# echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${loginpagearray[@]}" | tee -a $folder/$filename;
+# echo -e "$GREEN_BOLD[ * ] Checking specific files:$CLEAR_FONT"; PrintTheResults "${filetypesarray[@]}" | tee -a $folder/$filename;
+# echo -e "$GREEN_BOLD[ * ] Checking path traversal:$CLEAR_FONT"; PrintTheResults "${dirtravarray[@]}" | tee -a $folder/$filename;
