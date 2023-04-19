@@ -26,7 +26,7 @@ so, for next scan fresh machines with fresh IPs will be ready for scan
 for i in $(cat targets)
 do
     axiom-fleet "kole-" -i 5 &&
-    axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/FGDS.sh && chmod +x FGDS.sh" && 
+    axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/axiom_edition/fgds_axiom.sh && chmod +x FGDS.sh" && 
     axiom-scan payloads.txt -m fgds --target $i -o $i_fgds_results.txt --rm-when-done && 
     echo $i finished!!!
 done
