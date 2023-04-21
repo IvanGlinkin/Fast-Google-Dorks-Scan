@@ -5,8 +5,7 @@ This work is based on [an idea](https://github.com/IvanGlinkin/Fast-Google-Dorks
 # Usage example:
 
 ## Create your axiom instances
-`axiom-fleet "kole-" -i 5`  // You may want to 
-
+`axiom-fleet "kole-" -i 5`
 
 ## Send the FGDS.sh to instances and give execution permission to all instances you spin up
 `axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/axiom_edition/fgds_axiom.sh && chmod +x fgds_axiom.sh"`
