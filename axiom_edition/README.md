@@ -9,7 +9,7 @@ This work is based on [an idea](https://github.com/IvanGlinkin/Fast-Google-Dorks
 
 
 ## Send the FGDS.sh to instances and give execution permission to all instances you spin up
-`axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/FGDS.sh && chmod +x FGDS.sh"`
+`axiom-exec "wget https://raw.githubusercontent.com/cyb3rsalih/Fast-Google-Dorks-Scan/salih/axiom_edition/fgds_axiom.sh && chmod +x FGDS.sh"`
 
 ## Add the fgds.json to your modules on your master machine
 `mv fgds.json .axiom/modules`
