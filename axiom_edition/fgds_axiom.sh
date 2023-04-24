@@ -1043,7 +1043,7 @@ function Query {
 	### Echo results
 	if [ -z "$result" ] 
 		then
-			# echo -e "\n\t$RED_BOLD[ - ]$CLEAR_FONT No results"
+			echo " "
 		else
 			IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n")) # Sort the results
 			echo -e " "
