@@ -1001,30 +1001,13 @@ useragentsarray=(
 useragentlength=${#useragentsarray[@]};
 
 # Header
-echo -e "";
-echo -e "$ORANGE╔═══════════════════════════════════════════════════════════════════════════╗$CLEAR_FONT";
-echo -e "$ORANGE║\t\t\t\t\t\t\t\t\t    ║$CLEAR_FONT";
-echo -e "$ORANGE║$CLEAR_FONT$GREEN_BOLD\t\t\t    Fast Google Dorks Scan \t\t\t    $CLEAR_FONT$ORANGE║$CLEAR_FONT";
-echo -e "$ORANGE║\t\t\t\t\t\t\t\t\t    ║\e[00m";
-echo -e "$ORANGE╚═══════════════════════════════════════════════════════════════════════════╝$CLEAR_FONT";
-echo -e "";
-echo -e "$ORANGE[ ! ] https://www.linkedin.com/in/IvanGlinkin/ | @glinkinivan$CLEAR_FONT";
-echo -e "$ORANGE[ ! ] Version: $version $CLEAR_FONT";
-echo -e "";
+# Cleared for sake of clean output
 
 # Check domain
 if [ -z "$target" ] 
 then
 	echo -e "$ORANGE[ ! ] Usage example:$CLEAR_FONT$RED_BOLD bash $0 $example_domain $CLEAR_FONT"
 	exit
-else
-	### Check if the folder for outputs is existed. IF not, create a folder
-	if [ ! -d "$folder" ]; then mkdir "$folder"; fi
-	## Create an output file
-	filename=$(date +%Y%m%d_%H%M%S)_$target.txt
-	
-	echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$target$CLEAR_FONT"
-	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)/$folder/$filename$CLEAR_FONT"
 fi
 
 ### Function to get information about the site ### START
@@ -1060,11 +1043,11 @@ function Query {
 	### Echo results
 	if [ -z "$result" ] 
 		then
-			echo -e "\n\t$RED_BOLD[ - ]$CLEAR_FONT No results"
+			# echo -e "\n\t$RED_BOLD[ - ]$CLEAR_FONT No results"
 		else
 			IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n")) # Sort the results
 			echo -e " "
-			for each in "${sorted[@]}"; do echo -e "\t$GREEN[ + ]$CLEAR_FONT $each"; done
+			for each in "${sorted[@]}"; do echo -e "$each"; done
 	fi
 
 	### Unset variables
@@ -1077,7 +1060,7 @@ function PrintTheResults {
 	for dirtrav in $@; 
 		do
 		clearrequest=$(echo $dirtrav | sed 's/+/ /g;s/%\(..\)/\\x\1/g;' | xargs -0 printf '%b');
-		echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Google query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
+		echo "Google query:" $gsite $clearrequest
 		Query $dirtrav 
 	done
 echo " "
@@ -1085,7 +1068,4 @@ echo " "
 ### Function to print the results ### END
 
 # Exploit
-echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${custom_payloads_list[@]}" | tee -a $folder/$filename;
-# echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${loginpagearray[@]}" | tee -a $folder/$filename;
-# echo -e "$GREEN_BOLD[ * ] Checking specific files:$CLEAR_FONT"; PrintTheResults "${filetypesarray[@]}" | tee -a $folder/$filename;
-# echo -e "$GREEN_BOLD[ * ] Checking path traversal:$CLEAR_FONT"; PrintTheResults "${dirtravarray[@]}" | tee -a $folder/$filename;
+PrintTheResults "${custom_payloads_list[@]}"
