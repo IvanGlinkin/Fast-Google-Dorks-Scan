@@ -1,6 +1,5 @@
-FROM alpine:latest
+FROM bash:5.1-alpine3.17
 
-RUN apk update && apk add --no-cache bash curl
-COPY . . 
-RUN chmod 755 ./FGDS.sh
-ENTRYPOINT ["./FGDS.sh"]
+RUN apk add --no-cache curl
+ADD --chmod=0755 FGDS.sh ./FGDS.sh
+ENTRYPOINT ["bash", "./FGDS.sh"]
