@@ -1029,7 +1029,7 @@ else
 	filename=$(date +%Y%m%d_%H%M%S)_$domain.txt
 	
 	echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
-	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)/$folder/$filename$CLEAR_FONT"
+	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)$folder/$filename$CLEAR_FONT"
 fi
 
 ### Function to get information about the site ### START
