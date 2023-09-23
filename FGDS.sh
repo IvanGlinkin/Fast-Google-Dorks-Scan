@@ -51,13 +51,18 @@ lpauth="inurl:auth"
 lpexc="inurl:exchange"
 lpfp="inurl:ForgotPassword"
 lptest="inurl:test"
-lgit="inurl:.git"
-loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest $lgit)
+lpgit="inurl:.git"
+lpbkp="inurl:backup"
+loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest $lgit $lpgit $lpbkp)
 
 ## Filetypes
 ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
+ftdot="filetype:dot"						## Filetype DOT (MsWord Template 97-2003)
+ftdocm="filetype:docm"						## Filetype DOCM (MsWord Template 97-2003)
 ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
+ftdotx="filetype:dotx"						## Filetype DOTX (MsWord Template 2007+)
 ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
+ftxlsm="filetype:xlsm"						## Filetype XLSM (MsExcel Template 97-2003)
 ftxlsx="filetype:xlsx"						## Filetype XLSX (MsExcel 2007+)
 ftppt="filetype:ppt"						## Filetype PPT (MsPowerPoint 97-2003)
 ftpptx="filetype:pptx"						## Filetype PPTX (MsPowerPoint 2007+)
@@ -88,7 +93,14 @@ ftpfx="filetype:pfx"						## Filetype Certificate
 ftcrl="filetype:crl"						## Filetype Certificate 
 ftcrs="filetype:crs"						## Filetype Certificate 
 ftder="filetype:der"						## Filetype Certificate 
-filetypesarray=($ftdoc $ftdocx $ftxls $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa $ftpy $ftphtml $ftpsh $ftpodt $ftpkey $ftpsgn $ftpmd $ftpold $ftpbin $ftcer $ftcrt $ftpfx $ftcrl $ftcrs $ftder)
+ftappages="filetype:pages"					## Apple Pages (Word Processor)
+ftappresent="filetype:keynote"					## Apple Keynote (Presentation)
+ftappnumbers="filetype:numbers"					## Apple Numbers (Spreadsheet)
+ftodt="filetype:odt"						## Open Office Text
+ftods="filetype:ods"						## Open Office Spreadsheet
+ftodp="filetype:odp"						## Open Office Presentation
+ftodg="filetype:odg"						## Open Office Graphics
+filetypesarray=($ftdoc $ftdot $ftdocm $ftdocx $ftdotx $ftxls $ftxlsm $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa $ftpy $ftphtml $ftpsh $ftpodt $ftpkey $ftpsgn $ftpmd $ftpold $ftpbin $ftcer $ftcrt $ftpfx $ftcrl $ftcrs $ftder $ftappages $ftappresent $ftappnumbers $ftodt $ftods $ftodp $ftodg)
 
 ## Directory traversal
 dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
@@ -99,7 +111,15 @@ dtmail='intitle:%22index%20of%22%20%22mail%22'			## Mail
 dtpassword='intitle:%22index%20of%22%20%22password%22'		## Password
 dtpub='intitle:%22index%20of%22%20%22pub%22'			## Pub
 dtgit='intitle:%22index%20of%22%20%22.git%22'			## Pub
-dirtravarray=($dtparent $dtdcim $dtftp $dtbackup $dtmail $dtpassword $dtpub $dtgit)
+dtlog='intitle:%22index%20of%22%20%22log%22'			## Log - Log files
+dtconf='intitle:%22index%20of%22%20%22src%22'			## Src - Sourcecodes
+dtenv='intitle:%22index%20of%22%20%22env%22'			## Env - Environment settings
+dtdenv='intitle:%22index%20of%22%20%22.env%22'			## .Env - Environment settings
+dtdsql='intitle:%22index%20of%22%20%22.sql%22'			## .Sql - Sql settings or dbs
+dtapi='intitle:%22index%20of%22%20%22api%22'			## Api - Sensitive info about an API
+dtvenv='intitle:%22index%20of%22%20%22venv%22'			## Virtual Environment Python
+dtadmin='intitle:%22index%20of%22%20%admin%22'			## Admin
+dirtravarray=($dtparent $dtdcim $dtftp $dtbackup $dtmail $dtpassword $dtpub $dtgit $dtlog $dtconf $dtenv $dtdenv $dtdsql $dtapi $dtvenv $dtadmin)
 
 ## User-agents
 useragentsarray=(
