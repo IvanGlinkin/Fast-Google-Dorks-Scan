@@ -14,7 +14,7 @@
 
 # Variables
 ## General
-version="2.335"			## Version Year.Day
+version="3.149"			## Version Year.Day
 updatedate="April 5,2023"	## The date of the last update
 releasedate="May 3, 2020"	## The date of release
 example_domain="megacorp.one" 	## Example domain
