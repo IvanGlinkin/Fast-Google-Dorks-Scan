@@ -13,6 +13,12 @@ or
 bash ./FGDS.sh megacorp.one
 ```
 
+with proxy
+
+```
+bash ./FGDS.sh megacorp.one 192.168.1.1 8080
+```
+
 This will work beatifully on Kali but an ultimately universal way is through Docker. Just run 
 
 ```
@@ -25,11 +31,6 @@ and then run it with your argument for the URL such as this:
 docker run -it --rm FOO mysite.com
 ```
 
-An original article:
---------------------
-[https://www.ivanglinkin.com/fast-google-dorks-scan/](https://www.ivanglinkin.com/fast-google-dorks-scan/)
-
-
 Video example:
 --------------
 ![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_Video.gif?raw=true)
@@ -37,3 +38,9 @@ Video example:
 Screenshots:
 ------------
 ![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_image_2.335.png?raw=true)
+
+
+An original article:
+--------------------
+[https://www.ivanglinkin.com/fast-google-dorks-scan/](https://www.ivanglinkin.com/fast-google-dorks-scan/)
+
