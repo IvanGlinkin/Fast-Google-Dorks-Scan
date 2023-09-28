@@ -1042,7 +1042,8 @@ echo -e "";
 # Check domain
 if [ -z "$domain" ] 
 then
-	echo -e "$ORANGE[ ! ] Usage example:$CLEAR_FONT$RED_BOLD bash $0 $example_domain $CLEAR_FONT"
+	echo -e "$ORANGE[ ! ] Usage example (simple):$CLEAR_FONT$RED_BOLD bash $0 $example_domain $CLEAR_FONT"
+ 	echo -e "$ORANGE[ ! ] Usage example (proxy): $CLEAR_FONT$RED_BOLD bash $0 $example_domain 192.168.1.1 8080$CLEAR_FONT"
 	exit
 else
 	### Check if the folder for outputs is existed. IF not, create a folder
