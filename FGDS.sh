@@ -14,33 +14,129 @@
 
 # Variables
 ## General
-version="3.171"			## Version Year.Day
-updatedate="October 21, 2023"	## The date of the last update
-releasedate="May 3, 2020"	## The date of release
-example_domain="megacorp.one" 	## Example domain
-domain=$1 			## Get the domain
-proxyurl=$2			## Proxy URL
-proxyport=$3			## Proxy Port
-gsite="site:$domain" 		## Google Site
-folder="outputs"		## Output folder name
+version="4.000"           ## Version Year.Day
+updatedate="June 24, 2024"   ## The date of the last update
+releasedate="June 24, 2024"       ## The date of release
+## example_domain="megacorp.one"    ## NOT USED
+domains_file=$1 ## Get the file with the list of domains
+proxyurl=$2            ## Proxy URL
+proxyport=$3           ## Proxy Port
+folder="outputs"       ## Output folder name
 
-## Request the repository
-onlinevar=`curl -s https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/settings.conf`
-onlineversion=`echo $onlinevar | awk -F\" '{print $2}'`		# Latest version
-onlineupdatedate=`echo $onlinevar | awk -F\" '{print $4}'`	# The date of release
-sponsorstartdate=`echo $onlinevar | awk -F\" '{print $6}'`	# Sponsor start date 
-sponsorenddate=`echo $onlinevar | awk -F\" '{print $8}'`	# Sponsor end date
-sponsordata=`echo $onlinevar | awk -F\" '{print $10}'`		# Sponsor data to be presented
+if [[ ! -f "$domains_file" ]]; then
+  echo "File not found!"
+  exit 1
+fi
 
 ## Colors
-RED=`echo -n '\e[00;31m'`;
-RED_BOLD=`echo -n '\e[01;31m'`;
-GREEN=`echo -n '\e[00;32m'`;
-GREEN_BOLD=`echo -n '\e[01;32m'`;
-ORANGE=`echo -n '\e[00;33m'`;
-BLUE=`echo -n '\e[01;36m'`;
-WHITE=`echo -n '\e[00;37m'`;
-CLEAR_FONT=`echo -n '\e[00m'`;
+RED=`echo -n '\e[00;31m'`
+RED_BOLD=`echo -n '\e[01;31m'`
+GREEN=`echo -n '\e[00;32m'`
+GREEN_BOLD=`echo -n '\e[01;32m'`
+ORANGE=`echo -n '\e[00;33m'`
+BLUE=`echo -n '\e[01;36m'`
+WHITE=`echo -n '\e[00;37m'`
+CLEAR_FONT=`echo -n '\e[00m'`
+
+# Functions
+function Query {
+    result=""
+    for start in `seq 0 10 40`; do
+        index=$(( RANDOM % useragentlength ))
+        randomuseragent=${useragentsarray[$index]}
+
+        if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then 
+            query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")    
+        else
+            query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+        fi
+
+        checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
+        if [ "$checkban" == "https://www.google.com/sorry/index" ]; then 
+            echo -e "\n\t$RED_BOLD[ ! ]$CLEAR_FONT Google thinks you are the robot and has banned you;) How dare he? So, you have to wait some time to unban or change your ip!" 
+            exit
+        fi
+                
+        checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$domain/[a-zA-Z0-9./?=_~-]*")
+        sleeptime=$(shuf -i8-12 -n1)
+        if [ -z "$checkdata" ]; then
+            sleep $sleeptime
+            break
+        else
+            result+="$checkdata "
+            sleep $sleeptime
+        fi
+    done
+
+    if [ -z "$result" ]; then
+        echo -e "\n\t$RED_BOLD[ - ]$CLEAR_FONT No results"
+    else
+        IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n"))
+        echo -e " "
+        for each in "${sorted[@]}"; do echo -e "\t$GREEN[ + ]$CLEAR_FONT $each"; done
+    fi
+
+    unset IFS sorted result checkdata checkban query
+}
+
+function PrintTheResults {
+    for dirtrav in $@; do
+        clearrequest=$(echo $dirtrav | sed 's/+/ /g;s/%\(..\)/\\x\1/g;' | xargs -0 printf '%b')
+        echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Google query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
+        Query $dirtrav 
+    done
+    echo " "
+}
+
+# Read the file and process each domain
+while IFS= read -r domain; do
+    gsite="site:$domain" ## Google Site
+    echo "Processing domain: $domain"
+
+    if [ -z "$domain" ]; then
+        echo -e "$ORANGE[ ! ] Usage example (simple):$CLEAR_FONT$RED_BOLD bash $0 $example_domain $CLEAR_FONT"
+        echo -e "$ORANGE[ ! ] Usage example (proxy): $CLEAR_FONT$RED_BOLD bash $0 $example_domain 192.168.1.1 8080$CLEAR_FONT"
+        exit
+    else
+        if [ ! -d "$folder" ]; then mkdir "$folder"; fi
+        filename=$(date +%Y%m%d_%H%M%S)_$domain.txt
+        echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
+        if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+            echo -e "$ORANGE[ ! ] Proxy set to:   $CLEAR_FONT $RED_BOLD$proxyurl Port: $proxyport$CLEAR_FONT"
+        fi
+        echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)/$folder/$filename$CLEAR_FONT"
+    fi
+
+    ## Request the repository
+    onlinevar=`curl -s https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/settings.conf`
+    onlineversion=`echo $onlinevar | awk -F\" '{print $2}'`        # Latest version
+    onlineupdatedate=`echo $onlinevar | awk -F\" '{print $4}'`     # The date of release
+    sponsorstartdate=`echo $onlinevar | awk -F\" '{print $6}'`     # Sponsor start date 
+    sponsorenddate=`echo $onlinevar | awk -F\" '{print $8}'`       # Sponsor end date
+    sponsordata=`echo $onlinevar | awk -F\" '{print $10}'`         # Sponsor data to be presented
+
+    ## Version check and sponsor information
+    checktheversion=$(echo "$version < $onlineversion" | bc -l)
+    if [ "$checktheversion" -eq 1 ]; then
+        echo -e "$RED_BOLD[ ! ] Your current FGDS version ($version) is outdated!\n[ ! ] The latest version is$CLEAR_FONT $GREEN_BOLD$onlineversion $CLEAR_FONT\n$RED_BOLD[ ! ] You can download the latest version by executing the next command:\n[ ! ]$CLEAR_FONT$GREEN_BOLD git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git $CLEAR_FONT"
+    else
+        echo -e "$ORANGE[ ! ] Version: $version (latest)$CLEAR_FONT"
+    fi
+
+    current_timestamp=$(date +%s)
+    start_timestamp=$(date -d "$sponsorstartdate" +%s)
+    end_timestamp=$(date -d "$sponsorenddate" +%s)
+
+    if [ "$current_timestamp" -ge "$start_timestamp" ] && [ "$current_timestamp" -le "$end_timestamp" ]; then
+        echo -e "$BLUE[ ! ] Sponsor: $sponsordata $CLEAR_FONT"
+    fi
+
+    # Perform the main tasks
+    echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${loginpagearray[@]}" | tee -a $folder/$filename
+    echo -e "$GREEN_BOLD[ * ] Checking Filetypes:$CLEAR_FONT"; PrintTheResults "${filetypesarray[@]}" | tee -a $folder/$filename
+    echo -e "$GREEN_BOLD[ * ] Checking Directory Traversal:$CLEAR_FONT"; PrintTheResults "${dirtravarray[@]}" | tee -a $folder/$filename
+
+done < "$domains_file"
 
 ## Login pages
 lpadmin="inurl:admin"
@@ -1045,25 +1141,6 @@ echo -e "$ORANGE╚════════════════════�
 echo -e "";
 echo -e "$ORANGE[ ! ] https://www.linkedin.com/in/IvanGlinkin/ | https://x.com/glinkinivan$CLEAR_FONT";
 
-# Check the version
-checktheversion=$(echo "$version < $onlineversion" | bc -l)
-if [ "$checktheversion" -eq 1 ]; then
-    echo -e "$RED_BOLD[ ! ] You current FGDS version ($version) is outdated!\n[ ! ] The latest version is$CLEAR_FONT $GREEN_BOLD$onlineversion $CLEAR_FONT\n$RED_BOLD[ ! ] You can download the latest version by executing the next command:\n[ ! ]$CLEAR_FONT$GREEN_BOLD git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git $CLEAR_FONT";
-else
-    echo -e "$ORANGE[ ! ] Version: $version (latest)$CLEAR_FONT";
-fi
-echo -e "";
-
-# Sponsor data
-current_timestamp=$(date +%s)
-start_timestamp=$(date -d "$sponsorstartdate" +%s)
-end_timestamp=$(date -d "$sponsorenddate" +%s)
-
-if [ "$current_timestamp" -ge "$start_timestamp" ] && [ "$current_timestamp" -le "$end_timestamp" ]; then
-	echo -e "$BLUE[ ! ] Sponsor: $sponsordata $CLEAR_FONT";
-	echo -e "";
-fi
-
 # Check domain
 if [ -z "$domain" ] 
 then
@@ -1084,68 +1161,6 @@ else
 	fi
 	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)$folder/$filename$CLEAR_FONT"
 fi
-
-### Function to get information about the site ### START
-function Query {
-	result="";
-	for start in `seq 0 10 40`; ##### Last number - quantity of possible answers
-		do
-			index=$(( RANDOM % useragentlength ))
-			randomuseragent=${useragentsarray[$index]}
-
-			if [ -n "$proxyurl" ] && [ -n "$proxyport" ]
-				then 
-					query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")	
-				else
-					query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
-			fi
-
-			checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
-			if [ "$checkban" == "https://www.google.com/sorry/index" ]
-			then 
-				echo -e "\n\t$RED_BOLD[ ! ]$CLEAR_FONT Google thinks you are the robot and has banned you;) How dare he? So, you have to wait some time to unban or change your ip!"; 
-				exit;
-			fi
-				
-			checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$domain/[a-zA-Z0-9./?=_~-]*")
-			
-			sleeptime=$(shuf -i8-12 -n1);
-			if [ -z "$checkdata" ]
-				then
-					sleep $sleeptime; # Sleep to prevent banning
-					break; # Exit the loop
-				else
-					result+="$checkdata ";
-					sleep $sleeptime; # Sleep to prevent banning
-			fi
-	done
-
-	### Echo results
-	if [ -z "$result" ] 
-		then
-			echo -e "\n\t$RED_BOLD[ - ]$CLEAR_FONT No results"
-		else
-			IFS=$'\n' sorted=($(sort -u <<<"${result[@]}" | tr " " "\n")) # Sort the results
-			echo -e " "
-			for each in "${sorted[@]}"; do echo -e "\t$GREEN[ + ]$CLEAR_FONT $each"; done
-	fi
-
-	### Unset variables
-	unset IFS sorted result checkdata checkban query
-}
-### Function to get information about site ### END
-
-### Function to print the results ### START
-function PrintTheResults {
-	for dirtrav in $@; 
-		do
-		clearrequest=$(echo $dirtrav | sed 's/+/ /g;s/%\(..\)/\\x\1/g;' | xargs -0 printf '%b');
-		echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Google query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
-		Query $dirtrav 
-	done
-echo " "
-}
-### Function to print the results ### END
 
 # Exploit
 echo -e "$GREEN_BOLD[ * ] Checking Login Page:$CLEAR_FONT"; PrintTheResults "${loginpagearray[@]}" | tee -a $folder/$filename;
