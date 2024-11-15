@@ -1208,12 +1208,14 @@ function Query {
 					;;
 			esac
 
-			checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
-			if [ "$checkban" == "https://www.google.com/sorry/index" ]
-			then 
-				echo -e "\n\t$RED_BOLD[ ! ]$CLEAR_FONT Google thinks you are the robot and has banned you;) How dare he? So, you have to wait some time to unban or change your ip!"; 
-				exit;
-			fi
+      if [ "$search_engine" == "google" ]; then
+		    checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
+        if [ "$checkban" == "https://www.google.com/sorry/index" ]
+        then 
+          echo -e "\n\t$RED_BOLD[ ! ]$CLEAR_FONT Google thinks you are the robot and has banned you;) How dare he? So, you have to wait some time to unban or change your ip!"; 
+          exit;
+        fi
+	    fi
 				
 			checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$domain/[a-zA-Z0-9./?=_~-]*")
 
