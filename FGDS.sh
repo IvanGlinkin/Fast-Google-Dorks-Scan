@@ -43,93 +43,96 @@ WHITE=`echo -n '\e[00;37m'`;
 CLEAR_FONT=`echo -n '\e[00m'`;
 
 ## Login pages
-lpadmin="inurl:admin"
-lplogin="inurl:login"
-lpadminlogin="inurl:adminlogin"
-lpcplogin="inurl:cplogin"
-lpweblogin="inurl:weblogin"
-lpquicklogin="inurl:quicklogin"
-lpwp1="inurl:wp-admin"
-lpwp2="inurl:wp-login"
-lpportal="inurl:portal"
-lpuserportal="inurl:userportal"
-lploginpanel="inurl:loginpanel"
-lpmemberlogin="inurl:memberlogin"
-lpremote="inurl:remote"
-lpdashboard="inurl:dashboard"
-lpauth="inurl:auth"
-lpexc="inurl:exchange"
-lpfp="inurl:ForgotPassword"
-lptest="inurl:test"
-lpgit="inurl:.git"
-lpbkp="inurl:backup"
-loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest $lgit $lpgit $lpbkp)
+loginpagearray=(
+    'inurl:admin'            # Admin page
+    'inurl:login'            # Login page
+    'inurl:adminlogin'       # Admin login page
+    'inurl:cplogin'          # Control panel login
+    'inurl:weblogin'         # Web login page
+    'inurl:quicklogin'       # Quick login page
+    'inurl:wp-admin'         # WordPress admin page
+    'inurl:wp-login'         # WordPress login page
+    'inurl:portal'           # Portal login page
+    'inurl:userportal'       # User portal login page
+    'inurl:loginpanel'       # Login panel
+    'inurl:memberlogin'      # Member login page
+    'inurl:remote'           # Remote login page
+    'inurl:dashboard'        # Dashboard login page
+    'inurl:auth'             # Authentication page
+    'inurl:exchange'         # Exchange login page
+    'inurl:ForgotPassword'   # Forgot password page
+    'inurl:test'             # Test login page
+    'inurl:.git'             # .git directory
+    'inurl:backup'           # Backup page
+)
 
 ## Filetypes
-ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
-ftdot="filetype:dot"						## Filetype DOT (MsWord Template 97-2003)
-ftdocm="filetype:docm"						## Filetype DOCM (MsWord Template 97-2003)
-ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
-ftdotx="filetype:dotx"						## Filetype DOTX (MsWord Template 2007+)
-ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
-ftxlsm="filetype:xlsm"						## Filetype XLSM (MsExcel Template 97-2003)
-ftxlsx="filetype:xlsx"						## Filetype XLSX (MsExcel 2007+)
-ftppt="filetype:ppt"						## Filetype PPT (MsPowerPoint 97-2003)
-ftpptx="filetype:pptx"						## Filetype PPTX (MsPowerPoint 2007+)
-ftmdb="filetype:mdb"						## Filetype MDB (Ms Access)
-ftpdf="filetype:pdf"						## Filetype PDF
-ftsql="filetype:sql"						## Filetype SQL
-fttxt="filetype:txt"						## Filetype TXT
-ftrtf="filetype:rtf"						## Filetype RTF
-ftcsv="filetype:csv"						## Filetype CSV
-ftxml="filetype:xml"						## Filetype XML
-ftconf="filetype:conf"						## Filetype CONF
-ftdat="filetype:dat"						## Filetype DAT
-ftini="filetype:ini"						## Filetype INI
-ftlog="filetype:log"						## Filetype LOG
-ftidrsa="index%20of:id_rsa%20id_rsa.pub"			## File ID_RSA
-ftpy="filetype:py"						## Filetype Python
-ftphtml="filetype:html"						## Filetype HTML
-ftpsh="filetype:sh"						## Filetype Bash 
-ftpodt="filetype:odt"						## Filetype ODT
-ftpkey="filetype:key"						## Filetype KEY
-ftpsgn="filetype:sign"						## Filetype SIGN
-ftpmd="filetype:md"						## Filetype MD 
-ftpold="filetype:old"						## Filetype OLD 
-ftpbin="filetype:bin"						## Filetype BIN 
-ftcer="filetype:cer"						## Filetype Certificate 
-ftcrt="filetype:crt"						## Filetype Certificate 
-ftpfx="filetype:pfx"						## Filetype Certificate 
-ftcrl="filetype:crl"						## Filetype Certificate 
-ftcrs="filetype:crs"						## Filetype Certificate 
-ftder="filetype:der"						## Filetype Certificate 
-ftappages="filetype:pages"					## Apple Pages (Word Processor)
-ftappresent="filetype:keynote"					## Apple Keynote (Presentation)
-ftappnumbers="filetype:numbers"					## Apple Numbers (Spreadsheet)
-ftodt="filetype:odt"						## Open Office Text
-ftods="filetype:ods"						## Open Office Spreadsheet
-ftodp="filetype:odp"						## Open Office Presentation
-ftodg="filetype:odg"						## Open Office Graphics
-filetypesarray=($ftdoc $ftdot $ftdocm $ftdocx $ftdotx $ftxls $ftxlsm $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa $ftpy $ftphtml $ftpsh $ftpodt $ftpkey $ftpsgn $ftpmd $ftpold $ftpbin $ftcer $ftcrt $ftpfx $ftcrl $ftcrs $ftder $ftappages $ftappresent $ftappnumbers $ftodt $ftods $ftodp $ftodg)
+filetypesarray=(
+    'filetype:doc'      # Filetype DOC (MsWord 97-2003)
+    'filetype:dot'      # Filetype DOT (MsWord Template 97-2003)
+    'filetype:docm'     # Filetype DOCM (MsWord Template 97-2003)
+    'filetype:docx'     # Filetype DOCX (MsWord 2007+)
+    'filetype:dotx'     # Filetype DOTX (MsWord Template 2007+)
+    'filetype:xls'      # Filetype XLS (MsExcel 97-2003)
+    'filetype:xlsm'     # Filetype XLSM (MsExcel Template 97-2003)
+    'filetype:xlsx'     # Filetype XLSX (MsExcel 2007+)
+    'filetype:ppt'      # Filetype PPT (MsPowerPoint 97-2003)
+    'filetype:pptx'     # Filetype PPTX (MsPowerPoint 2007+)
+    'filetype:mdb'      # Filetype MDB (Ms Access)
+    'filetype:pdf'      # Filetype PDF
+    'filetype:sql'      # Filetype SQL
+    'filetype:txt'      # Filetype TXT
+    'filetype:rtf'      # Filetype RTF
+    'filetype:csv'      # Filetype CSV
+    'filetype:xml'      # Filetype XML
+    'filetype:conf'     # Filetype CONF
+    'filetype:dat'      # Filetype DAT
+    'filetype:ini'      # Filetype INI
+    'filetype:log'      # Filetype LOG
+    'index of:id_rsa id_rsa.pub' # File ID_RSA
+    'filetype:py'       # Filetype Python
+    'filetype:html'     # Filetype HTML
+    'filetype:sh'       # Filetype Bash
+    'filetype:odt'      # Filetype ODT
+    'filetype:key'      # Filetype KEY
+    'filetype:sign'     # Filetype SIGN
+    'filetype:md'       # Filetype MD
+    'filetype:old'      # Filetype OLD
+    'filetype:bin'      # Filetype BIN
+    'filetype:cer'      # Filetype Certificate
+    'filetype:crt'      # Filetype Certificate
+    'filetype:pfx'      # Filetype Certificate
+    'filetype:crl'      # Filetype Certificate
+    'filetype:crs'      # Filetype Certificate
+    'filetype:der'      # Filetype Certificate
+    'filetype:pages'    # Apple Pages (Word Processor)
+    'filetype:keynote'  # Apple Keynote (Presentation)
+    'filetype:numbers'  # Apple Numbers (Spreadsheet)
+    'filetype:odt'      # Open Office Text
+    'filetype:ods'      # Open Office Spreadsheet
+    'filetype:odp'      # Open Office Presentation
+    'filetype:odg'      # Open Office Graphics
+)
 
 ## Directory traversal
-dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
-dtdcim='intitle:%22index%20of%22%20%22DCIM%22' 			## Photo
-dtftp='intitle:%22index%20of%22%20%22ftp%22' 			## FTP
-dtbackup='intitle:%22index%20of%22%20%22backup%22'		## BackUp
-dtmail='intitle:%22index%20of%22%20%22mail%22'			## Mail
-dtpassword='intitle:%22index%20of%22%20%22password%22'		## Password
-dtpub='intitle:%22index%20of%22%20%22pub%22'			## Pub
-dtgit='intitle:%22index%20of%22%20%22.git%22'			## Pub
-dtlog='intitle:%22index%20of%22%20%22log%22'			## Log - Log files
-dtconf='intitle:%22index%20of%22%20%22src%22'			## Src - Sourcecodes
-dtenv='intitle:%22index%20of%22%20%22env%22'			## Env - Environment settings
-dtdenv='intitle:%22index%20of%22%20%22.env%22'			## .Env - Environment settings
-dtdsql='intitle:%22index%20of%22%20%22.sql%22'			## .Sql - Sql settings or dbs
-dtapi='intitle:%22index%20of%22%20%22api%22'			## Api - Sensitive info about an API
-dtvenv='intitle:%22index%20of%22%20%22venv%22'			## Virtual Environment Python
-dtadmin='intitle:%22index%20of%22%20%admin%22'			## Admin
-dirtravarray=($dtparent $dtdcim $dtftp $dtbackup $dtmail $dtpassword $dtpub $dtgit $dtlog $dtconf $dtenv $dtdenv $dtdsql $dtapi $dtvenv $dtadmin)
+dirtravarray=(
+	'intitle:"index of" "parent directory"'  # Common traversal
+	'intitle:"index of" "DCIM"'              # Photo
+	'intitle:"index of" "ftp"'               # FTP
+	'intitle:"index of" "backup"'            # BackUp
+	'intitle:"index of" "mail"'              # Mail
+	'intitle:"index of" "password"'          # Password
+	'intitle:"index of" "pub"'               # Pub
+	'intitle:"index of" ".git"'              # Git
+	'intitle:"index of" "log"'               # Log files
+	'intitle:"index of" "src"'               # Source codes
+	'intitle:"index of" "env"'               # Environment settings
+	'intitle:"index of" ".env"'              # .Env - Environment settings
+	'intitle:"index of" ".sql"'              # .Sql - DB or settings
+	'intitle:"index of" "api"'               # Sensitive API info
+	'intitle:"index of" "venv"'              # Python Virtual Environment
+	'intitle:"index of" "admin"'             # Admin
+)
 
 ## User-agents
 useragentsarray=(
