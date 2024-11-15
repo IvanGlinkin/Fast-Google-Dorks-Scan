@@ -18,11 +18,9 @@ version="3.171"			## Version Year.Day
 updatedate="October 21, 2023"	## The date of the last update
 releasedate="May 3, 2020"	## The date of release
 example_domain="megacorp.one" 	## Example domain
-domain=$1 			## Get the domain
-proxyurl=$2			## Proxy URL
-proxyport=$3			## Proxy Port
-gsite="site:$domain" 		## Google Site
 folder="outputs"		## Output folder name
+sleeptime_min_default=8    ## Default minimum sleep time
+sleeptime_max_default=12   ## Default maximum sleep time
 
 ## Request the repository
 onlinevar=`curl -s https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/settings.conf`
@@ -1067,6 +1065,69 @@ if [ "$current_timestamp" -ge "$start_timestamp" ] && [ "$current_timestamp" -le
 	echo -e "";
 fi
 
+# Function to display parameter options
+display_help() {
+  echo -e "Usage: bash $0 [options] domain"
+  echo -e "\nOptions:"
+  echo -e "  --proxy-url [URL]      Set the proxy URL (e.g., http://proxy.example.com)"
+  echo -e "  --proxy-port [PORT]    Set the proxy port (e.g., 8080)"
+  echo -e "  --sleep-time-min [MIN]    Set the minimum shuffle sleep time (default is 8 seconds)"
+  echo -e "  --sleep-time-max [MAX]    Set the maximum shuffle sleep time (default is 12 seconds)"
+  echo -e "  --help                 Display this help message"
+  exit 0
+}
+
+# Function to validate domain syntax and check if it is known by Google
+domain_check() {
+  local domain="$1"
+  if [[ ! "$domain" =~ ^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]; then
+    echo "Invalid domain syntax: $domain"
+    exit 1
+  fi
+}
+
+rest=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --proxy-url)
+      proxyurl="$2"
+      shift 2
+      ;;
+    --proxy-port)
+      proxyport="$2"
+      shift 2
+      ;;
+    --sleep-time-min)
+      sleeptime_min="$2"
+      shift 2
+      ;;
+    --sleep-time-max)
+      sleeptime_max="$2"
+      shift 2
+      ;;
+    --help)
+      display_help
+      ;;
+    *)
+      rest="$rest $1"
+      shift
+      ;;
+  esac
+done
+
+for p in $rest; do
+    if [[ "$p" == "--"* ]]; then
+echo "Unknown option $p"
+exit 1
+fi
+done
+
+set $rest
+
+domain="$1"
+
+#echo "domain: $domain, sleeptimemin: $sleeptime_min, sleeptimemax: $sleeptime_max, proxyurl: $proxyurl, proxyport: $proxyport"
+
 # Check domain
 if [ -z "$domain" ] 
 then
@@ -1074,18 +1135,28 @@ then
  	echo -e "$ORANGE[ ! ] Usage example (proxy): $CLEAR_FONT$RED_BOLD bash $0 $example_domain 192.168.1.1 8080$CLEAR_FONT"
 	exit
 else
+
+    gsite="site:$domain" 		## Google Site
+
+    # Validate domain syntax
+    domain_check "$domain"
+
 	### Check if the folder for outputs is existed. IF not, create a folder
 	if [ ! -d "$folder" ]; then mkdir "$folder"; fi
 	## Create an output file
 	filename=$(date +%Y%m%d_%H%M%S)_$domain.txt
 	
-	echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
+    echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
 	
-	if [ -n "$proxyurl" ] && [ -n "$proxyport" ]
-	then
-		echo -e "$ORANGE[ ! ] Proxy set to:   $CLEAR_FONT $RED_BOLD$proxyurl Port: $proxyport$CLEAR_FONT"
-	fi
-	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)$folder/$filename$CLEAR_FONT"
+    if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+      echo -e "$ORANGE[ ! ] Proxy set to:   $CLEAR_FONT $RED_BOLD$proxyurl Port: $proxyport$CLEAR_FONT"
+      # Check if proxy is reachable
+      if ! curl -s --proxy "$proxyurl:$proxyport" --max-time 10 https://www.google.com > /dev/null; then
+        echo -e "$RED_BOLD[ ! ] Proxy is not reachable. Please check the proxy settings.$CLEAR_FONT"
+        exit 1
+      fi
+    fi
+    echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)$folder/$filename$CLEAR_FONT"
 fi
 
 ### Function to get information about the site ### START
@@ -1111,8 +1182,10 @@ function Query {
 			fi
 				
 			checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$domain/[a-zA-Z0-9./?=_~-]*")
-			
-			sleeptime=$(shuf -i8-12 -n1);
+
+			sleeptime_min="${sleeptime_min:-$sleeptime_min_default}"
+			sleeptime_max="${sleeptime_max:-$sleeptime_max_default}"
+			sleeptime=$(shuf -i$sleeptime_min-$sleeptime_max -n1); # Use given sleep time range or default
 			if [ -z "$checkdata" ]
 				then
 					sleep $sleeptime; # Sleep to prevent banning
