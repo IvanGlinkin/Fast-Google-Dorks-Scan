@@ -19,6 +19,7 @@ updatedate="October 21, 2023"	## The date of the last update
 releasedate="May 3, 2020"	## The date of release
 example_domain="megacorp.one" 	## Example domain
 folder="outputs"		## Output folder name
+search_engine="google"  ## Default search engine is Google
 sleeptime_min_default=8    ## Default minimum sleep time
 sleeptime_max_default=12   ## Default maximum sleep time
 
@@ -1073,6 +1074,7 @@ display_help() {
   echo -e "  --proxy-port [PORT]    Set the proxy port (e.g., 8080)"
   echo -e "  --sleep-time-min [MIN]    Set the minimum shuffle sleep time (default is 8 seconds)"
   echo -e "  --sleep-time-max [MAX]    Set the maximum shuffle sleep time (default is 12 seconds)"
+  echo -e "  --search-engine [ENGINE]  Set the search engine to use (google, bing, duckduckgo)"
   echo -e "  --help                 Display this help message"
   exit 0
 }
@@ -1105,6 +1107,10 @@ while [ $# -gt 0 ]; do
       sleeptime_max="$2"
       shift 2
       ;;
+	--search-engine)
+		search_engine="$2"
+		shift 2
+		;;
     --help)
       display_help
       ;;
@@ -1126,6 +1132,7 @@ set $rest
 
 domain="$1"
 
+
 #echo "domain: $domain, sleeptimemin: $sleeptime_min, sleeptimemax: $sleeptime_max, proxyurl: $proxyurl, proxyport: $proxyport"
 
 # Check domain
@@ -1136,7 +1143,12 @@ then
 	exit
 else
 
-    gsite="site:$domain" 		## Google Site
+    gsite="site:$domain"        ## Default Google site query
+	if [ "$search_engine" == "bing" ]; then
+		gsite="site:$domain"  ## Bing site query
+	elif [ "$search_engine" == "duckduckgo" ]; then
+		gsite="site:$domain"  ## DuckDuckGo site query
+	fi
 
     # Validate domain syntax
     domain_check "$domain"
@@ -1167,12 +1179,34 @@ function Query {
 			index=$(( RANDOM % useragentlength ))
 			randomuseragent=${useragentsarray[$index]}
 
-			if [ -n "$proxyurl" ] && [ -n "$proxyport" ]
-				then 
-					query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")	
-				else
-					query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
-			fi
+			query=""
+			case "$search_engine" in
+				google)
+					if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+						query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+					else
+						query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+					fi
+					;;
+				bing)
+					if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+						query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -A "\"$randomuseragent\"" "https://www.bing.com/search?q=$gsite%20$1&first=$start")
+					else
+						query=$(echo; curl -sS -A "\"$randomuseragent\"" "https://www.bing.com/search?q=$gsite%20$1&first=$start")
+					fi
+					;;
+				duckduckgo)
+					if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+						query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -A "\"$randomuseragent\"" "https://duckduckgo.com/html/?q=$gsite%20$1&start=$start")
+					else
+						query=$(echo; curl -sS -A "\"$randomuseragent\"" "https://duckduckgo.com/html/?q=$gsite%20$1&start=$start")
+					fi
+					;;
+				*)
+					echo -e "$RED_BOLD[ ! ] Unsupported search engine: $search_engine$CLEAR_FONT"
+					exit 1
+					;;
+			esac
 
 			checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
 			if [ "$checkban" == "https://www.google.com/sorry/index" ]
@@ -1216,7 +1250,7 @@ function PrintTheResults {
 	for dirtrav in $@; 
 		do
 		clearrequest=$(echo $dirtrav | sed 's/+/ /g;s/%\(..\)/\\x\1/g;' | xargs -0 printf '%b');
-		echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Google query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
+		echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Search query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
 		Query $dirtrav 
 	done
 echo " "
