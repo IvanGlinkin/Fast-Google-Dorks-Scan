@@ -31,13 +31,9 @@ and then run it with your argument for the URL such as this:
 docker run -it --rm fgds hydrattack.com
 ```
 
-Video example:
---------------
-![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_Video.gif?raw=true)
-
 Screenshots:
 ------------
-![](https://github.com/IvanGlinkin/media_support/blob/main/Fast-Google-Dorks-Scan_image_2.335.png?raw=true)
+![](https://github.com/IvanGlinkin/media_support/blob/main/FGDS-2025-06-20.png?raw=true)
 
 
 An original article:
