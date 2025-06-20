@@ -6,29 +6,29 @@ Usage example:
 --------------
 ```
 chmod +x FGDS.sh
-./FGDS.sh megacorp.one
+./FGDS.sh hydrattack.com
 ```
 or
 ```
-bash ./FGDS.sh megacorp.one
+bash ./FGDS.sh hydrattack.com
 ```
 
 with proxy
 
 ```
-bash ./FGDS.sh megacorp.one 192.168.1.1 8080
+bash ./FGDS.sh hydrattack.com 192.168.1.1 8080
 ```
 
 This will work beatifully on Kali but an ultimately universal way is through Docker. Just run 
 
 ```
-docker build -t FOO .
+docker build -t fgds .
 ```
 
 and then run it with your argument for the URL such as this:
 
 ```
-docker run -it --rm FOO mysite.com
+docker run -it --rm fgds hydrattack.com
 ```
 
 Video example:
