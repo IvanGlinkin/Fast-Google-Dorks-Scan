@@ -14,8 +14,8 @@
 
 # Variables
 ## General
-version="3.171"			## Version Year.Day
-updatedate="October 21, 2023"	## The date of the last update
+version="5.048"			## Version Year.Day
+updatedate="June 20, 2025"	## The date of the last update
 releasedate="May 3, 2020"	## The date of release
 example_domain="megacorp.one" 	## Example domain
 domain=$1 			## Get the domain
@@ -40,6 +40,7 @@ GREEN_BOLD=`echo -n '\e[01;32m'`;
 ORANGE=`echo -n '\e[00;33m'`;
 BLUE=`echo -n '\e[01;36m'`;
 WHITE=`echo -n '\e[00;37m'`;
+MAGENTA=`echo -n '\e[00;35m'`;
 CLEAR_FONT=`echo -n '\e[00m'`;
 
 ## Login pages
@@ -1035,15 +1036,26 @@ useragentsarray=(
 );
 useragentlength=${#useragentsarray[@]};
 
-# Header
-echo -e "";
-echo -e "$ORANGE╔═══════════════════════════════════════════════════════════════════════════╗$CLEAR_FONT";
-echo -e "$ORANGE║\t\t\t\t\t\t\t\t\t    ║$CLEAR_FONT";
-echo -e "$ORANGE║$CLEAR_FONT$GREEN_BOLD\t\t\t    Fast Google Dorks Scan \t\t\t    $CLEAR_FONT$ORANGE║$CLEAR_FONT";
-echo -e "$ORANGE║\t\t\t\t\t\t\t\t\t    ║\e[00m";
-echo -e "$ORANGE╚═══════════════════════════════════════════════════════════════════════════╝$CLEAR_FONT";
-echo -e "";
-echo -e "$ORANGE[ ! ] https://www.linkedin.com/in/IvanGlinkin/ | https://x.com/glinkinivan$CLEAR_FONT";
+# Banner
+echo -e "$BLUE  
+  +++++                          +++++  
+   ++++++++++++          ++++++++++++   
+     +++++++++++++    +++++++++++++      
+       ++++++++          ++++++++           HydrAttack$CLEAR_FONT Fast Google Dorks Scan
+$BLUE        ++++++            ++++++          
+          ++++            ++++             $CLEAR_FONTmade by$BLUE EASM HydrAttack$CLEAR_FONT, the OSINT project, the main idea of which
+$BLUE            ++            ++               $CLEAR_FONT is to collect all the possible$MAGENTA Google$CLEAR_FONT dorks search
+$BLUE             +            +                $CLEAR_FONT$MAGENTA combinations$CLEAR_FONT and to find the information about the specific web-site
+$BLUE              +          +               
+               +++    +++                
+               ++++++++++                
+                ++++++++                    $CLEAR_FONT$GREEN[web-site]$CLEAR_FONT https://hydrattack.com/
+$BLUE                ++++++++                    $CLEAR_FONT$GREEN[Xtwitter]$CLEAR_FONT https://twitter.com/EASM_HydrAttack
+$BLUE                 ++++++                     $CLEAR_FONT$GREEN[telegram]$CLEAR_FONT https://t.me/EASM_HydrAttack
+$BLUE                  ++++                      $CLEAR_FONT$GREEN[linkedin]$CLEAR_FONT https://www.linkedin.com/company/HydrAttack
+$BLUE                  ++++                  
+                   ++                   
+$CLEAR_FONT"
 
 # Check the version
 checktheversion=$(echo "$version < $onlineversion" | bc -l)
