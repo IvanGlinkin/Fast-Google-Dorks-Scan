@@ -1051,7 +1051,7 @@ $BLUE              +          +
                ++++++++++                
                 ++++++++                    $CLEAR_FONT$GREEN[web-site]$CLEAR_FONT https://hydrattack.com/
 $BLUE                ++++++++                    $CLEAR_FONT$GREEN[Xtwitter]$CLEAR_FONT https://twitter.com/EASM_HydrAttack
-$BLUE                 ++++++                     $CLEAR_FONT$GREEN[telegram]$CLEAR_FONT https://t.me/EASM_HydrAttack
+$BLUE                 ++++++                     $CLEAR_FONT$GREEN[telegram]$CLEAR_FONT https://t.me/HydrAttack
 $BLUE                  ++++                      $CLEAR_FONT$GREEN[linkedin]$CLEAR_FONT https://www.linkedin.com/company/HydrAttack
 $BLUE                  ++++                  
                    ++                   
