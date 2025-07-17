@@ -18,11 +18,10 @@ version="5.048"			## Version Year.Day
 updatedate="June 20, 2025"	## The date of the last update
 releasedate="May 3, 2020"	## The date of release
 example_domain="megacorp.one" 	## Example domain
-domain=$1 			## Get the domain
-proxyurl=$2			## Proxy URL
-proxyport=$3			## Proxy Port
-gsite="site:$domain" 		## Google Site
 folder="outputs"		## Output folder name
+search_engine="google"  ## Default search engine is Google
+sleeptime_min_default=8    ## Default minimum sleep time
+sleeptime_max_default=12   ## Default maximum sleep time
 
 ## Request the repository
 onlinevar=`curl -s https://raw.githubusercontent.com/IvanGlinkin/Fast-Google-Dorks-Scan/master/settings.conf`
@@ -44,93 +43,96 @@ MAGENTA=`echo -n '\e[00;35m'`;
 CLEAR_FONT=`echo -n '\e[00m'`;
 
 ## Login pages
-lpadmin="inurl:admin"
-lplogin="inurl:login"
-lpadminlogin="inurl:adminlogin"
-lpcplogin="inurl:cplogin"
-lpweblogin="inurl:weblogin"
-lpquicklogin="inurl:quicklogin"
-lpwp1="inurl:wp-admin"
-lpwp2="inurl:wp-login"
-lpportal="inurl:portal"
-lpuserportal="inurl:userportal"
-lploginpanel="inurl:loginpanel"
-lpmemberlogin="inurl:memberlogin"
-lpremote="inurl:remote"
-lpdashboard="inurl:dashboard"
-lpauth="inurl:auth"
-lpexc="inurl:exchange"
-lpfp="inurl:ForgotPassword"
-lptest="inurl:test"
-lpgit="inurl:.git"
-lpbkp="inurl:backup"
-loginpagearray=($lpadmin $lplogin $lpadminlogin $lpcplogin $lpweblogin $lpquicklogin $lpwp1 $lpwp2 $lpportal $lpuserportal $lploginpanel $memberlogin $lpremote $lpdashboard $lpauth $lpexc $lpfp $lptest $lgit $lpgit $lpbkp)
+loginpagearray=(
+    'inurl:admin'            # Admin page
+    'inurl:login'            # Login page
+    'inurl:adminlogin'       # Admin login page
+    'inurl:cplogin'          # Control panel login
+    'inurl:weblogin'         # Web login page
+    'inurl:quicklogin'       # Quick login page
+    'inurl:wp-admin'         # WordPress admin page
+    'inurl:wp-login'         # WordPress login page
+    'inurl:portal'           # Portal login page
+    'inurl:userportal'       # User portal login page
+    'inurl:loginpanel'       # Login panel
+    'inurl:memberlogin'      # Member login page
+    'inurl:remote'           # Remote login page
+    'inurl:dashboard'        # Dashboard login page
+    'inurl:auth'             # Authentication page
+    'inurl:exchange'         # Exchange login page
+    'inurl:ForgotPassword'   # Forgot password page
+    'inurl:test'             # Test login page
+    'inurl:.git'             # .git directory
+    'inurl:backup'           # Backup page
+)
 
 ## Filetypes
-ftdoc="filetype:doc"						## Filetype DOC (MsWord 97-2003)
-ftdot="filetype:dot"						## Filetype DOT (MsWord Template 97-2003)
-ftdocm="filetype:docm"						## Filetype DOCM (MsWord Template 97-2003)
-ftdocx="filetype:docx"						## Filetype DOCX (MsWord 2007+)
-ftdotx="filetype:dotx"						## Filetype DOTX (MsWord Template 2007+)
-ftxls="filetype:xls"						## Filetype XLS (MsExcel 97-2003)
-ftxlsm="filetype:xlsm"						## Filetype XLSM (MsExcel Template 97-2003)
-ftxlsx="filetype:xlsx"						## Filetype XLSX (MsExcel 2007+)
-ftppt="filetype:ppt"						## Filetype PPT (MsPowerPoint 97-2003)
-ftpptx="filetype:pptx"						## Filetype PPTX (MsPowerPoint 2007+)
-ftmdb="filetype:mdb"						## Filetype MDB (Ms Access)
-ftpdf="filetype:pdf"						## Filetype PDF
-ftsql="filetype:sql"						## Filetype SQL
-fttxt="filetype:txt"						## Filetype TXT
-ftrtf="filetype:rtf"						## Filetype RTF
-ftcsv="filetype:csv"						## Filetype CSV
-ftxml="filetype:xml"						## Filetype XML
-ftconf="filetype:conf"						## Filetype CONF
-ftdat="filetype:dat"						## Filetype DAT
-ftini="filetype:ini"						## Filetype INI
-ftlog="filetype:log"						## Filetype LOG
-ftidrsa="index%20of:id_rsa%20id_rsa.pub"			## File ID_RSA
-ftpy="filetype:py"						## Filetype Python
-ftphtml="filetype:html"						## Filetype HTML
-ftpsh="filetype:sh"						## Filetype Bash 
-ftpodt="filetype:odt"						## Filetype ODT
-ftpkey="filetype:key"						## Filetype KEY
-ftpsgn="filetype:sign"						## Filetype SIGN
-ftpmd="filetype:md"						## Filetype MD 
-ftpold="filetype:old"						## Filetype OLD 
-ftpbin="filetype:bin"						## Filetype BIN 
-ftcer="filetype:cer"						## Filetype Certificate 
-ftcrt="filetype:crt"						## Filetype Certificate 
-ftpfx="filetype:pfx"						## Filetype Certificate 
-ftcrl="filetype:crl"						## Filetype Certificate 
-ftcrs="filetype:crs"						## Filetype Certificate 
-ftder="filetype:der"						## Filetype Certificate 
-ftappages="filetype:pages"					## Apple Pages (Word Processor)
-ftappresent="filetype:keynote"					## Apple Keynote (Presentation)
-ftappnumbers="filetype:numbers"					## Apple Numbers (Spreadsheet)
-ftodt="filetype:odt"						## Open Office Text
-ftods="filetype:ods"						## Open Office Spreadsheet
-ftodp="filetype:odp"						## Open Office Presentation
-ftodg="filetype:odg"						## Open Office Graphics
-filetypesarray=($ftdoc $ftdot $ftdocm $ftdocx $ftdotx $ftxls $ftxlsm $ftxlsx $ftppt $ftpptx $ftmdb $ftpdf $ftsql $fttxt $ftrtf $ftcsv $ftxml $ftconf $ftdat $ftini $ftlog $ftidrsa $ftpy $ftphtml $ftpsh $ftpodt $ftpkey $ftpsgn $ftpmd $ftpold $ftpbin $ftcer $ftcrt $ftpfx $ftcrl $ftcrs $ftder $ftappages $ftappresent $ftappnumbers $ftodt $ftods $ftodp $ftodg)
+filetypesarray=(
+    'filetype:doc'      # Filetype DOC (MsWord 97-2003)
+    'filetype:dot'      # Filetype DOT (MsWord Template 97-2003)
+    'filetype:docm'     # Filetype DOCM (MsWord Template 97-2003)
+    'filetype:docx'     # Filetype DOCX (MsWord 2007+)
+    'filetype:dotx'     # Filetype DOTX (MsWord Template 2007+)
+    'filetype:xls'      # Filetype XLS (MsExcel 97-2003)
+    'filetype:xlsm'     # Filetype XLSM (MsExcel Template 97-2003)
+    'filetype:xlsx'     # Filetype XLSX (MsExcel 2007+)
+    'filetype:ppt'      # Filetype PPT (MsPowerPoint 97-2003)
+    'filetype:pptx'     # Filetype PPTX (MsPowerPoint 2007+)
+    'filetype:mdb'      # Filetype MDB (Ms Access)
+    'filetype:pdf'      # Filetype PDF
+    'filetype:sql'      # Filetype SQL
+    'filetype:txt'      # Filetype TXT
+    'filetype:rtf'      # Filetype RTF
+    'filetype:csv'      # Filetype CSV
+    'filetype:xml'      # Filetype XML
+    'filetype:conf'     # Filetype CONF
+    'filetype:dat'      # Filetype DAT
+    'filetype:ini'      # Filetype INI
+    'filetype:log'      # Filetype LOG
+    'index of:id_rsa id_rsa.pub' # File ID_RSA
+    'filetype:py'       # Filetype Python
+    'filetype:html'     # Filetype HTML
+    'filetype:sh'       # Filetype Bash
+    'filetype:odt'      # Filetype ODT
+    'filetype:key'      # Filetype KEY
+    'filetype:sign'     # Filetype SIGN
+    'filetype:md'       # Filetype MD
+    'filetype:old'      # Filetype OLD
+    'filetype:bin'      # Filetype BIN
+    'filetype:cer'      # Filetype Certificate
+    'filetype:crt'      # Filetype Certificate
+    'filetype:pfx'      # Filetype Certificate
+    'filetype:crl'      # Filetype Certificate
+    'filetype:crs'      # Filetype Certificate
+    'filetype:der'      # Filetype Certificate
+    'filetype:pages'    # Apple Pages (Word Processor)
+    'filetype:keynote'  # Apple Keynote (Presentation)
+    'filetype:numbers'  # Apple Numbers (Spreadsheet)
+    'filetype:odt'      # Open Office Text
+    'filetype:ods'      # Open Office Spreadsheet
+    'filetype:odp'      # Open Office Presentation
+    'filetype:odg'      # Open Office Graphics
+)
 
 ## Directory traversal
-dtparent='intitle:%22index%20of%22%20%22parent%20directory%22' 	## Common traversal
-dtdcim='intitle:%22index%20of%22%20%22DCIM%22' 			## Photo
-dtftp='intitle:%22index%20of%22%20%22ftp%22' 			## FTP
-dtbackup='intitle:%22index%20of%22%20%22backup%22'		## BackUp
-dtmail='intitle:%22index%20of%22%20%22mail%22'			## Mail
-dtpassword='intitle:%22index%20of%22%20%22password%22'		## Password
-dtpub='intitle:%22index%20of%22%20%22pub%22'			## Pub
-dtgit='intitle:%22index%20of%22%20%22.git%22'			## Pub
-dtlog='intitle:%22index%20of%22%20%22log%22'			## Log - Log files
-dtconf='intitle:%22index%20of%22%20%22src%22'			## Src - Sourcecodes
-dtenv='intitle:%22index%20of%22%20%22env%22'			## Env - Environment settings
-dtdenv='intitle:%22index%20of%22%20%22.env%22'			## .Env - Environment settings
-dtdsql='intitle:%22index%20of%22%20%22.sql%22'			## .Sql - Sql settings or dbs
-dtapi='intitle:%22index%20of%22%20%22api%22'			## Api - Sensitive info about an API
-dtvenv='intitle:%22index%20of%22%20%22venv%22'			## Virtual Environment Python
-dtadmin='intitle:%22index%20of%22%20%admin%22'			## Admin
-dirtravarray=($dtparent $dtdcim $dtftp $dtbackup $dtmail $dtpassword $dtpub $dtgit $dtlog $dtconf $dtenv $dtdenv $dtdsql $dtapi $dtvenv $dtadmin)
+dirtravarray=(
+	'intitle:"index of" "parent directory"'  # Common traversal
+	'intitle:"index of" "DCIM"'              # Photo
+	'intitle:"index of" "ftp"'               # FTP
+	'intitle:"index of" "backup"'            # BackUp
+	'intitle:"index of" "mail"'              # Mail
+	'intitle:"index of" "password"'          # Password
+	'intitle:"index of" "pub"'               # Pub
+	'intitle:"index of" ".git"'              # Git
+	'intitle:"index of" "log"'               # Log files
+	'intitle:"index of" "src"'               # Source codes
+	'intitle:"index of" "env"'               # Environment settings
+	'intitle:"index of" ".env"'              # .Env - Environment settings
+	'intitle:"index of" ".sql"'              # .Sql - DB or settings
+	'intitle:"index of" "api"'               # Sensitive API info
+	'intitle:"index of" "venv"'              # Python Virtual Environment
+	'intitle:"index of" "admin"'             # Admin
+)
 
 ## User-agents
 useragentsarray=(
@@ -1076,6 +1078,75 @@ if [ "$current_timestamp" -ge "$start_timestamp" ] && [ "$current_timestamp" -le
 	echo -e "";
 fi
 
+# Function to display parameter options
+display_help() {
+  echo -e "Usage: bash $0 [options] domain"
+  echo -e "\nOptions:"
+  echo -e "  --proxy-url [URL]      Set the proxy URL (e.g., http://proxy.example.com)"
+  echo -e "  --proxy-port [PORT]    Set the proxy port (e.g., 8080)"
+  echo -e "  --sleep-time-min [MIN]    Set the minimum shuffle sleep time (default is 8 seconds)"
+  echo -e "  --sleep-time-max [MAX]    Set the maximum shuffle sleep time (default is 12 seconds)"
+  echo -e "  --search-engine [ENGINE]  Set the search engine to use (google, bing, duckduckgo)"
+  echo -e "  --help                 Display this help message"
+  exit 0
+}
+
+# Function to validate domain syntax and check if it is known by Google
+domain_check() {
+  local domain="$1"
+  if [[ ! "$domain" =~ ^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]; then
+    echo "Invalid domain syntax: $domain"
+    exit 1
+  fi
+}
+
+rest=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --proxy-url)
+      proxyurl="$2"
+      shift 2
+      ;;
+    --proxy-port)
+      proxyport="$2"
+      shift 2
+      ;;
+    --sleep-time-min)
+      sleeptime_min="$2"
+      shift 2
+      ;;
+    --sleep-time-max)
+      sleeptime_max="$2"
+      shift 2
+      ;;
+	--search-engine)
+		search_engine="$2"
+		shift 2
+		;;
+    --help)
+      display_help
+      ;;
+    *)
+      rest="$rest $1"
+      shift
+      ;;
+  esac
+done
+
+for p in $rest; do
+    if [[ "$p" == "--"* ]]; then
+echo "Unknown option $p"
+exit 1
+fi
+done
+
+set $rest
+
+domain="$1"
+
+
+#echo "domain: $domain, sleeptimemin: $sleeptime_min, sleeptimemax: $sleeptime_max, proxyurl: $proxyurl, proxyport: $proxyport"
+
 # Check domain
 if [ -z "$domain" ] 
 then
@@ -1083,18 +1154,33 @@ then
  	echo -e "$ORANGE[ ! ] Usage example (proxy): $CLEAR_FONT$RED_BOLD bash $0 $example_domain 192.168.1.1 8080$CLEAR_FONT"
 	exit
 else
+
+    gsite="site:$domain"        ## Default Google site query
+	if [ "$search_engine" == "bing" ]; then
+		gsite="site:$domain"  ## Bing site query
+	elif [ "$search_engine" == "duckduckgo" ]; then
+		gsite="site:$domain"  ## DuckDuckGo site query
+	fi
+
+    # Validate domain syntax
+    domain_check "$domain"
+
 	### Check if the folder for outputs is existed. IF not, create a folder
 	if [ ! -d "$folder" ]; then mkdir "$folder"; fi
 	## Create an output file
 	filename=$(date +%Y%m%d_%H%M%S)_$domain.txt
 	
-	echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
+    echo -e "$ORANGE[ ! ] Get information about:   $CLEAR_FONT $RED_BOLD$domain$CLEAR_FONT"
 	
-	if [ -n "$proxyurl" ] && [ -n "$proxyport" ]
-	then
-		echo -e "$ORANGE[ ! ] Proxy set to:   $CLEAR_FONT $RED_BOLD$proxyurl Port: $proxyport$CLEAR_FONT"
-	fi
-	echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)$folder/$filename$CLEAR_FONT"
+    if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+      echo -e "$ORANGE[ ! ] Proxy set to:   $CLEAR_FONT $RED_BOLD$proxyurl Port: $proxyport$CLEAR_FONT"
+      # Check if proxy is reachable
+      if ! curl -s --proxy "$proxyurl:$proxyport" --max-time 10 https://www.google.com > /dev/null; then
+        echo -e "$RED_BOLD[ ! ] Proxy is not reachable. Please check the proxy settings.$CLEAR_FONT"
+        exit 1
+      fi
+    fi
+    echo -e "$ORANGE[ ! ] Output file is saved:    $CLEAR_FONT $RED_BOLD$(pwd)$folder/$filename$CLEAR_FONT"
 fi
 
 ### Function to get information about the site ### START
@@ -1105,23 +1191,49 @@ function Query {
 			index=$(( RANDOM % useragentlength ))
 			randomuseragent=${useragentsarray[$index]}
 
-			if [ -n "$proxyurl" ] && [ -n "$proxyport" ]
-				then 
-					query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")	
-				else
-					query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
-			fi
+			query=""
+			case "$search_engine" in
+				google)
+					if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+						query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+					else
+						query=$(echo; curl -sS -b "CONSENT=YES+srp.gws-20211028-0-RC2.es+FX+330" -A "\"$randomuseragent\"" "https://www.google.com/search?q=$gsite%20$1&start=$start&client=firefox-b-e")
+					fi
+					;;
+				bing)
+					if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+						query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -A "\"$randomuseragent\"" "https://www.bing.com/search?q=$gsite%20$1&first=$start")
+					else
+						query=$(echo; curl -sS -A "\"$randomuseragent\"" "https://www.bing.com/search?q=$gsite%20$1&first=$start")
+					fi
+					;;
+				duckduckgo)
+					if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+						query=$(echo; curl --proxy "$proxyurl:$proxyport" -sS -A "\"$randomuseragent\"" "https://duckduckgo.com/html/?q=$gsite%20$1&start=$start")
+					else
+						query=$(echo; curl -sS -A "\"$randomuseragent\"" "https://duckduckgo.com/html/?q=$gsite%20$1&start=$start")
+					fi
+					;;
+				*)
+					echo -e "$RED_BOLD[ ! ] Unsupported search engine: $search_engine$CLEAR_FONT"
+					exit 1
+					;;
+			esac
 
-			checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
-			if [ "$checkban" == "https://www.google.com/sorry/index" ]
-			then 
-				echo -e "\n\t$RED_BOLD[ ! ]$CLEAR_FONT Google thinks you are the robot and has banned you;) How dare he? So, you have to wait some time to unban or change your ip!"; 
-				exit;
-			fi
+      if [ "$search_engine" == "google" ]; then
+		    checkban=$(echo $query | grep -io "https://www.google.com/sorry/index")
+        if [ "$checkban" == "https://www.google.com/sorry/index" ]
+        then 
+          echo -e "\n\t$RED_BOLD[ ! ]$CLEAR_FONT Google thinks you are the robot and has banned you;) How dare he? So, you have to wait some time to unban or change your ip!"; 
+          exit;
+        fi
+	    fi
 				
 			checkdata=$(echo $query | grep -Eo "(http|https)://[a-zA-Z0-9./?=_~-]*$domain/[a-zA-Z0-9./?=_~-]*")
-			
-			sleeptime=$(shuf -i8-12 -n1);
+
+			sleeptime_min="${sleeptime_min:-$sleeptime_min_default}"
+			sleeptime_max="${sleeptime_max:-$sleeptime_max_default}"
+			sleeptime=$(shuf -i$sleeptime_min-$sleeptime_max -n1); # Use given sleep time range or default
 			if [ -z "$checkdata" ]
 				then
 					sleep $sleeptime; # Sleep to prevent banning
@@ -1152,7 +1264,7 @@ function PrintTheResults {
 	for dirtrav in $@; 
 		do
 		clearrequest=$(echo $dirtrav | sed 's/+/ /g;s/%\(..\)/\\x\1/g;' | xargs -0 printf '%b');
-		echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Google query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
+		echo -en "$BLUE[ > ]$CLEAR_FONT" Checking $(echo $dirtrav | cut -d ":" -f 2 | tr '[:lower:]' '[:upper:]' | sed "s@+@ @g;s@%@\\\\x@g" | xargs -0 printf "%b") $(echo "   $ORANGE[ Search query:"$CLEAR_FONT$BLUE $gsite $clearrequest$CLEAR_FONT "$ORANGE]$CLEAR_FONT")
 		Query $dirtrav 
 	done
 echo " "
